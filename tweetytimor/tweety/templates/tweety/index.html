@@ -1,0 +1,18 @@
+<html>
+    <body>
+    <head>
+            <title>
+            
+            </title>
+    </head>
+    <p>Tweety Timor</p>
+     <p>{{ description|default: "Hello Timor-Leste" }}</p>
+        <form action="." method="post">
+        <input type= = "text" name = "description value= "{{ description }}""/>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <p> {{ form.description }} </p>
+            <button id="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </body>
+</html>
