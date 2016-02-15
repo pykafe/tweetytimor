@@ -15,15 +15,16 @@ def impl(context):
 
 @when(u'I click the add button') #noqa
 def impl(context):
-    context.browser.find_by_id('submit').click()
+    context.browser.find_by_css('form button').click()
 
 @when(u'I type some text into the text entry box') #noqa
 def impl(context):
-    context.browser.find_by_id('id_comment').fill('Diak ka lae?\r')
+    for row in context.table:
+    context.browser.find_by_tag('textarea').fill(row=['text'])
 
 @then(u'a text entry box is visible') #noqa
 def impl(context):
-    assert context.browser.find_by_id('id_comment')
+    assert context.browser.find_by_tag('textarea')
 
 @when(u'I visit the website') #noqa
 def impl(context):
@@ -36,4 +37,4 @@ def impl(context):
 
 @then(u'an Add button is visible') #noqa
 def impl(context):
-    assert context.browser.find_by_id('submit')
+    assert context.browser.find_by_css('form button')
