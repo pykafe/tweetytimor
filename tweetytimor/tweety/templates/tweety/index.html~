@@ -22,7 +22,7 @@
                 <p> {{ form.comment}}</p>
                 <p>{{ form.comment.errors }}</p>
                 <div class = "row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <button id="submit">Add Comment</button>
                     </div>
                 </div>
