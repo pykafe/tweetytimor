@@ -5,9 +5,9 @@ from behave import given, when, then
 def impl(context):
     # find a list in the page - find_by_tag - look for an unordered list tag 'ul'
     # assign that list to a variable so we can use it later 'tweetlist'
-
+    for row in context.table:
     # assert that we have found that list
-
+        assert context.browser.find_by_text(row['text'])
     # for every row in context.table
         # assert that an element is in the list with the text row['text'] find_by_text
 
