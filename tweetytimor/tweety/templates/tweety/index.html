@@ -6,10 +6,10 @@
     <ul>
         {% for tweet in tweets %}
              <li>
-                 {{ tweet.comment }}
+                 <span>{{ tweet.comment }}</span>
                  <i>Created on {{ tweet.created_on }}</i>
              </li>
-    {% endfor %}
+        {% endfor %}
     </ul>
 
         <p>Total of the comment have {{total_count}}{% if total_count == 1 %} people {%elif total_count == 0 %} no comment {% else %} peoples {% endif %}</p>
