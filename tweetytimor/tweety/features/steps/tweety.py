@@ -3,7 +3,13 @@ from behave import given, when, then
 
 @then(u'the tweety text is visible')
 def impl(context):
-        assert context.browser.find_by_text(row['Diak ka lae ?'])
+    # find a list in the page - find_by_tag - look for an unordered list tag 'ul'
+    # assign that list to a variable so we can use it later 'tweetlist'
+
+    # assert that we have found that list
+
+    # for every row in context.table
+        # assert that an element is in the list with the text row['text'] find_by_text
 
 
 @when(u'I click the add button')
