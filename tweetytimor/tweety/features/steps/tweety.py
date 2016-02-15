@@ -20,7 +20,7 @@ def impl(context):
 @when(u'I type some text into the text entry box') #noqa
 def impl(context):
     for row in context.table:
-        context.browser.find_by_tag('textarea').fill(row=['text'])
+        context.browser.find_by_tag('textarea').fill(row['text'])
 
 @then(u'a text entry box is visible') #noqa
 def impl(context):
