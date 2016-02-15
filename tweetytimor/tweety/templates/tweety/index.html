@@ -1,20 +1,24 @@
 <h1>Hello Tweety Timor</h1>
 <hr>
+
 <div class ="container">
     <p>say something...</p>
-{% for add in description %}
-<ul>
-    <li>{{ add.comment }}</li>
-    <i>Created on {{ add.created_on }}</i>
-</ul>
-{% endfor %}
+    <ul>
+        {% for tweet in tweets %}
+             <li>
+                 {{ tweet.comment }}
+                 <i>Created on {{ tweet.created_on }}</i>
+             </li>
+    {% endfor %}
+    </ul>
 
-<p>Total of the comment have {{total_count}}{% if total_count == 1 %} people {%elif total_count == 0 %} no comment {% else %} peoples {% endif %}</p>
-<form action="." method="post">
-    {% csrf_token %}
-    <p>Add your {{ form.comment.label_tag }}...</p>
-    <p> {{ form.comment}}</p>
-    <p>{{ form.comment.errors }}</p>
-    <button id="submit">Add Comment</button>
-</form>
+        <p>Total of the comment have {{total_count}}{% if total_count == 1 %} people {%elif total_count == 0 %} no comment {% else %} peoples {% endif %}</p>
+
+    <form action="." method="post">
+        {% csrf_token %}
+            <p>Add your {{ form.comment.label_tag }}...</p>
+            <p> {{ form.comment}}</p>
+            <p>{{ form.comment.errors }}</p>
+        <button id="submit">Add Comment</button>
+    </form>
 </div>
