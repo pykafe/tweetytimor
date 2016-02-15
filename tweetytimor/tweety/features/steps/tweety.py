@@ -3,7 +3,11 @@ from behave import when, then
 
 @then(u'the tweety text is visible') #noqa
 def impl(context):
-    context.browser.find_by_css('.container.ul.li')
+    # find the list of comments - an unordered list <ul> - use find_by_tag
+    # assert that an unordered list exists
+    # for every row in the context table
+    # assert that an element exists IN THE list of comments with text from the table
+
 
 @when(u'I click the add button') #noqa
 def impl(context):
