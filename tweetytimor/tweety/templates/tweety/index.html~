@@ -4,41 +4,71 @@
 <html lang="en">
     <head>
         <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
-        <link type="text/css" rel="stylesheet" media="screen" href="{{STATIC_URL}}css/biopy.css"/>
+        <link rel="stylesheet" href="{% static 'css/tweety.css' %}" />
     
-        <title> Hello Tweety </title>
+        <title> Tweety - Timor </title>
     </head>
     <body>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
-                <h1>Hello Tweety Timor</h1>
+                <h2> Hello Tweety Timor </h2>
             </div>
         </nav>
+
         <div class ="container">
-            <p>say something...</p>
-            <form action="." method="post">
-                {% csrf_token %}
-                <p>Add your {{ form.comment.label_tag }}...</p>
-                <p> {{ form.comment}}</p>
-                <p>{{ form.comment.errors }}</p>
-                <div class = "row">
-                    <div class="col-md-6">
-                        <button id="submit">Add Comment</button>
+            <div class="panel-body">
+                <ul class="nav nav-pills">
+                    <div class = "row">
+                        <div class = "col-md-2">
+                            <p>
+                                <h4> Say Something : </h4>
+                            </p>
+                        </div>
+                        <div class = "col-md-10">
+                            <form action="." method="post">
+                                {% csrf_token %}
+                                <p>{{ form.comment }}</p>
+                                <p>{{ form.comment.errors }}</p>
+                              
+                            </form>
+                        </div>
                     </div>
-                </div>
-            </form>
-        
-            <ul>
-                {% for tweet in tweets %}
-                 <li>
-                     <span>{{ tweet.comment }}</span>
-                     <i>Created on {{ tweet.created_on }}</i>
-                 </li>
-                {% endfor %}
-            </ul>
-
-            <p>Total of the comment have {{total_count}}{% if total_count == 1 %} people {%elif total_count == 0 %} no comment {% else %} peoples {% endif %}</p>
-
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset4">
+                            <button id="submit" class="btn btn-primary">Add Comment</button>
+                        </div>
+                    </div>
+                    <hr>
+                    <tr>
+                        <ul>
+                            {% for tweet in tweets %}
+                             <li>
+                                 <p>{{ tweet.comment }}</p>
+                                 <span class="badge">
+                                    <p><i> Created on {{ tweet.created_on }} </i></p>
+                                 </span>
+                                 <hr>
+                             </li>
+                            {% endfor %}
+                        </ul>
+                    </tr>  
+                    <p><h3>Total
+                            <span class="badge"> 
+                                {{ total_count }}
+                            </span>
+                            {% if total_count == 1 %} 
+                                Tweets
+                            {%elif total_count == 0 %} 
+                                no comment 
+                            {% else %} Tweets {% endif %}
+                        </h3>
+                    </p>
+                </ul>
+            </div>
         </div>
+        <footer class="footer">
+             Copyright &copy; <a href="https://github.com/catalpainternational/">Catalpa International</a> 2016
+        </footer>
+         
     </body>
 </html>
