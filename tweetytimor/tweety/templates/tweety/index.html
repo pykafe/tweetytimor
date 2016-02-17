@@ -1,7 +1,20 @@
+{% load static %}
+
+<script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js'%}"></script>
+
 <h1>Hello Tweety Timor</h1>
 <hr>
 
 <div class ="container">
+
+    <ol id="hide">
+        <button id="button">Show all History</button>
+    </ol>
+    <ol style="display: none">
+        <button class="button">Add your Comment</button>
+    </ol>
+
+ <ol id="hide">
     <p>say something...</p>
     <ul>
         {% for tweet in tweets %}
@@ -12,7 +25,7 @@
         {% endfor %}
     </ul>
 
-        <p>Total of the comment have {{total_count}}{% if total_count == 1 %} people {%elif total_count == 0 %} no comment {% else %} peoples {% endif %}</p>
+        <p>Total of the comment have {{total_tweets}}{% if total_tweets == 1 %} people {%elif total_tweets == 0 %} no comment {% else %} peoples {% endif %}</p>
 
     <form action="." method="post">
         {% csrf_token %}
@@ -21,4 +34,28 @@
             <p>{{ form.comment.errors }}</p>
         <button id="submit">Add Comment</button>
     </form>
+ </ol>
+            
+    <ol style="display: none">
+        <h3> All History</h3>
+         {% for tweet_history in tweets_histories %}
+              <li>
+                 <span>{{ tweet_history.comment }}</span>
+                 <i>{{ tweet_history.created_on }}</i>
+              </li>
+        {% endfor %}
+    </ol>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+             $( "#button" ).click(function() {
+                    $( "ol" ).slideToggle( "fast" );
+             });
+             $( ".button" ).click(function() {
+                    $( "ol" ).slideToggle( "fast" );
+            });
+        });
+
+    </script>
+
 </div>

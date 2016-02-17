@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+# 'endless_pagination',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -96,6 +97,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+# ENDLESS_PAGINATION_PER_PAGE = 5
 
 
 # Static files (CSS, JavaScript, Images)

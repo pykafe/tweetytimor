@@ -11,6 +11,7 @@ class Index(CreateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(Index, self).get_context_data(*args, **kwargs)
-        context['tweets'] = TweetyTimor.objects.all()
-        context['total_count'] = TweetyTimor.objects.count()
+        context['tweets'] = TweetyTimor.objects.order_by('-created_on')[:5]
+        context['tweets_histories'] = TweetyTimor.objects.order_by('-created_on')
+        context['total_tweets'] = TweetyTimor.objects.count()
         return context
