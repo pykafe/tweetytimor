@@ -7,93 +7,93 @@
         <link rel="stylesheet" href="{% static 'css/tweety.css' %}" />
         <script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js'%}"></script>
     
-        <title> Tweety - Timor </title>
+        <title>Tweety - Timor</title>
     </head>
     <body>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
-                <h2> Hello Tweety Timor </h2>
-                    <button id="button">Show all History</button>
+                <h2>Hello Tweety Timor</h2>
+                <button id="toggle_history">Show all History</button>
             </div>
         </nav>
- <ul id=" hide">
-        <div class ="container">
-            <div class="panel-body">
-                <ul class="nav nav-pills">
-                    <div class = "row">
-                        <div class = "col-md-12">
-                            <p>
-                                <h4> Say Something : </h4>
-                            </p>
-                            <form action="." method="post">
-                                {% csrf_token %}
-                                <p>{{ form.comment }}</p>
-                                <p>{{ form.comment.errors }}</p>
-                              
-                            </form>
+        <div>
+            <div class ="container">
+                <div class="panel-body">
+                    <div id="tweetdisplay" class="nav nav-pills">
+                        <div class = "row">
+                            <div class = "col-md-12">
+                                <p>
+                                    <h4> Say Something : </h4>
+                                </p>
+                                <form action="." method="post">
+                                    {% csrf_token %}
+                                    <p>{{ form.comment }}</p>
+                                    <p>{{ form.comment.errors }}</p>
+                                </form>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-4">
-                            <button id="submit" class="btn btn-primary">Add Comment</button>
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-4">
+                                <button id="add_tweet" class="btn btn-primary">Add Comment</button>
+                            </div>
                         </div>
-                    </div>
-                    <hr>
-                    <tr>
+                        <hr>
                         <ul>
                             {% for tweet in tweets %}
-                             <li>
-                                 <p>{{ tweet.comment }}</p>
-                                 <span class="badge">
-                                    <p><i> Created on {{ tweet.created_on }} </i></p>
-                                 </span>
-                                 <hr>
-                             </li>
+                            <li>
+                                <p>{{ tweet.comment }}</p>
+                                <span class="badge">
+                                   <p><i> Created on {{ tweet.created_on }} </i></p>
+                                </span>
+                                <hr>
+                            </li>
                             {% endfor %}
                         </ul>
-                    </tr>  
-                    <p><h3>Total
-                            <span class="badge"> 
-                                {{ total_tweets }}
-                            </span>
-                            {% if total_tweets == 1 %} 
-                                Tweets
-                            {%elif total_tweets == 0 %} 
-                                no comment 
-                            {% else %} Tweets {% endif %}
-                        </h3>
-                    </p>
-                </ul>
-        </ul>
-            </div>
-        </div>
-
-    <ul style="display: none">
-        <div class="container">
-            <div class="panel-body">
-                <div class = "row">
-                    <div class="col-md-12">
-                              <h3> All History</h3>
+                        <p>
+                            <h3>Total
+                                <span class="badge"> 
+                                    {{ total_tweets }}
+                                </span>
+                                {% if total_tweets == 1 %} 
+                                    Tweets
+                                {%elif total_tweets == 0 %} 
+                                    no comment 
+                                {% else %} Tweets {% endif %}
+                            </h3>
+                        </p>
+                    </div>
+                    <div id="history" class = "row">
+                        <div class="col-md-12">
+                             <h3> All History</h3>
+                             <ul>
                              {% for tweet_history in tweets_histories %}
                                  <li>
                                     <span>{{ tweet_history.comment }}</span>
                                     <i>{{ tweet_history.created_on }}</i>
                                  </li>
                              {% endfor %}
+                             </ul>
+                        </div>
                     </div>
                 </div>
-    </ul>
-
-                     <script type="text/javascript">
-                         $(document).ready(function(){
-                            $( "#button" ).click(function() {
-                                $( "ul" ).slideToggle( "fast" );
-                            });
-                        });
-
-                    </script>
-
+            </div>
         </div>
+
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('#history').hide();
+                $( "#toggle_history" ).click(function() {
+                    $( "#history" ).slideToggle( "fast" );
+                    $( "#tweetdisplay" ).slideToggle( "fast" );
+                });
+
+                $('#add_tweet').click(function(){
+                    //submit the form
+                    $('form').submit();
+                });
+            });
+        </script>
+
         <footer class="footer">
              Copyright &copy; <a href="https://github.com/catalpainternational/">Catalpa International</a> 2016
         </footer>
