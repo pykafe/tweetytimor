@@ -13,7 +13,8 @@
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <h2>Hello Tweety Timor</h2>
-                <button id="toggle_history">Show all History</button>
+                <button id="toggle_history" class="history" class="toggle_history">Show all History</button>
+                <button id="tweetydisplay" id="history" id="toggle_history" class="toggle_history">Add your comment</button>
             </div>
         </nav>
         <div>
@@ -85,6 +86,7 @@
                 $( "#toggle_history" ).click(function() {
                     $( "#history" ).slideToggle( "fast" );
                     $( "#tweetdisplay" ).slideToggle( "fast" );
+                    $(".history").hide();
                 });
 
                 $('#add_tweet').click(function(){
