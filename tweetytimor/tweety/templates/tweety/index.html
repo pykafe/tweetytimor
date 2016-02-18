@@ -17,7 +17,7 @@
             </form>
             <ul>
                 {% for tweet in tweets %}
-                 <li>{{ tweet.comment }}</li>
+                <li>{{ count_tweets }} {{ tweet.comment }}</li>
                 {% endfor %}
             </ul>
         </div>
