@@ -1,0 +1,16 @@
+<h1>Hello Tweety Timor</h1>
+<p>say something...</p>
+
+<form action="." method="post">
+    {% csrf_token %}
+    <p>Add your {{ form.comment.label_tag }}</p>
+    <p> {{ form.comment}}</p>
+    <input type="submit" value="Add" />
+</form>
+<ul>
+    {% for tweet in tweets %}
+    <li>
+        {{ tweet.comment }}
+    </li>
+    {% endfor %}
+</ul>
