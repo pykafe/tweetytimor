@@ -63,3 +63,6 @@ target/
 
 # sqllite
 db.sqlite3
+
+# tilda files
+*~
