@@ -1,32 +1,38 @@
-<h1>Hello Tweety Timor</h1>
-<p>say something...</p>
+{% load static %}
+<html>
+    <head>
+        <script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+    </head>
+    <body>
+        <h1>Hello Tweety Timor</h1>
+        <p>say something...</p>
 
-<form action="." method="post">
-    {% csrf_token %}
-    <p>Add your {{ form.comment.label_tag }}</p>
-    <p> {{ form.comment}}</p>
-    <div id="textarea_feedback"></div>
-    <input type="submit" value="Add" />
-</form>
+        <form action="." method="post">
+            {% csrf_token %}
+            <p>Add your {{ form.comment.label_tag }}</p>
+            <p> {{ form.comment}}</p>
+            <div id="textarea_feedback"></div>
+            <input type="submit" value="Add" />
+        </form>
 
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var text_max = 200;
+                $('#textarea_feedback').html(text_max + ' characters remaining');
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        var text_max = 200;
-        $('#textarea_feedback').html(text_max + ' characters remaining');
+                $('#id_comment').keyup(function() {
+                    var text_length = $('#id_comment').val().length;
+                    var text_remaining = text_max - text_length;
 
-        $('#id_comment').keyup(function() {
-            var text_length = $('#id_comment').val().length;
-            var text_remaining = text_max - text_length;
+                    $('#textarea_feedback').html(text_remaining + ' characters remaining');
+                });
+            });
+        </script>
 
-            $('#textarea_feedback').html(text_remaining + ' characters remaining');
-        });
-    });
-
-</script>
-
-<ul>
-    {% for tweet in tweets %}
-    <li>{{ tweet.comment }}</li>
-    {% endfor %}
-</ul>
+        <ul>
+            {% for tweet in tweets %}
+            <li>{{ tweet.comment }}</li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
