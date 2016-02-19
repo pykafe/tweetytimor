@@ -15,9 +15,10 @@
                     </div>
                 </div>
             </form>
+            <p> There is {{ count_tweets }}
             <ul>
                 {% for tweet in tweets %}
-                <li>{{ count_tweets }} {{ tweet.comment }}</li>
+                <li>{{ tweet.comment }}</li>
                 {% endfor %}
             </ul>
         </div>
