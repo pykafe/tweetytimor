@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse_lazy
 
 class Index(CreateView):
     model = TweetyTimor
-    fields = ['comment']
+    fields = ['comment', 'nation']
     template_name = "tweety/index.html"
     success_url = reverse_lazy('index')
 

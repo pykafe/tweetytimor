@@ -4,7 +4,7 @@ from behave import when, then
 @then(u'the tweety text is visible') #noqa
 def impl(context):
     # find the list of comments - an unordered list <ul> - use find_by_tag
-    tweetlist = context.browser.find_by_tag('ul').first
+    tweetlist = context.browser.find_by_tag('h2').first
     # find the list of comments - an unordered list <ul> - use find_by_tag
     assert tweetlist
     # for every row in the context table
@@ -15,7 +15,7 @@ def impl(context):
 
 @when(u'I click the add button') #noqa
 def impl(context):
-    context.browser.find_by_css('form button').click()
+    context.browser.find_by_css('button#add_tweet').click()
 
 @when(u'I type some text into the text entry box') #noqa
 def impl(context):
@@ -37,4 +37,24 @@ def impl(context):
 
 @then(u'an Add button is visible') #noqa
 def impl(context):
-    assert context.browser.find_by_css('form button')
+    assert context.browser.find_by_css('button#add_tweet')
+
+@then(u'select only country') #noqa
+def impl(context):
+    assert context.browser.find_by_css('select option')
+
+@then(u'I am on page add comment') #noqa
+def impl(context):
+    context.browser.visit(context.config.server_url)
+
+@then(u'I see on page history') #noqa
+def impl(context):
+    assert context.browser.find_by_css('#history')
+
+@when(u'I clik the button add') #noqa
+def impl(context):
+    context.browser.find_by_css('button #toggle_comment').click()
+
+@when(u'I click tha button history') #noqa
+def impl(context):
+    context.browser.find_by_css('#toggle_history').click()

@@ -12,9 +12,7 @@
     <body>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
-                <h2>Hello Tweety Timor</h2>
-                <button id="toggle_history" class="history" class="toggle_history">Show all History</button>
-                <button id="tweetydisplay" id="history" id="toggle_history" class="toggle_history">Add your comment</button>
+                    <h2>Hello Tweety Timor</h2>
             </div>
         </nav>
         <div>
@@ -23,13 +21,17 @@
                     <div id="tweetdisplay" class="nav nav-pills">
                         <div class = "row">
                             <div class = "col-md-12">
+                                <button id="toggle_history" class="btn btn-primary">Show all History</button>
                                 <p>
-                                    <h4> Say Something : </h4>
+                                    <h4> Say Something: </h4>
                                 </p>
                                 <form action="." method="post">
                                     {% csrf_token %}
                                     <p>{{ form.comment }}</p>
                                     <p>{{ form.comment.errors }}</p>
+                                    <p>{{ form.nation.help_text }}:</p>
+                                    <p>{{ form.nation }}</p>
+                                    <p>{{ form.nation.errors }}</p>
                                 </form>
                             </div>
                         </div>
@@ -44,7 +46,7 @@
                             <li>
                                 <p>{{ tweet.comment }}</p>
                                 <span class="badge">
-                                   <p><i> Created on {{ tweet.created_on }} </i></p>
+                                    <p><i>It's tweety from {{tweet.nation|capfirst}} and Created on {{ tweet.created_on}}</i></p>
                                 </span>
                                 <hr>
                             </li>
@@ -63,14 +65,18 @@
                             </h3>
                         </p>
                     </div>
+
                     <div id="history" class = "row">
                         <div class="col-md-12">
+                             <button id="toggle_comment" class="btn btn-primary">Add your comment</button>
                              <h3> All History</h3>
                              <ul>
                              {% for tweet_history in tweets_histories %}
                                  <li>
-                                    <span>{{ tweet_history.comment }}</span>
-                                    <i>{{ tweet_history.created_on }}</i>
+                                    <p>{{ tweet_history.comment }}</p>
+                                    <span class="badge">
+                                         <p><i>It's tweety from {{tweet_history.nation|capfirst}} and Created on{{ tweet_history.created_on }}</i></span>
+                                    </span>
                                  </li>
                              {% endfor %}
                              </ul>
@@ -83,10 +89,13 @@
         <script type="text/javascript">
             $(document).ready(function(){
                 $('#history').hide();
-                $( "#toggle_history" ).click(function() {
+                $("#toggle_history").click(function() {
                     $( "#history" ).slideToggle( "fast" );
                     $( "#tweetdisplay" ).slideToggle( "fast" );
-                    $(".history").hide();
+                });
+                $("#toggle_comment").click(function() {
+                    $( "#history" ).slideToggle( "fast" );
+                    $( "#tweetdisplay" ).slideToggle( "fast" );
                 });
 
                 $('#add_tweet').click(function(){

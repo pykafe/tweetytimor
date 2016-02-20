@@ -5,5 +5,14 @@ from django.db import models
 
 class TweetyTimor(models.Model):
 
+    NATION_CHOICES = (
+            ('', 'All Country'),
+            ('timor-leste', 'Timor-Leste'),
+            ('usa', 'USA'),
+            ('england', 'England'),
+            ('australia', 'Australia'),
+            )
+
     comment = models.TextField(max_length=1000)
     created_on = models.DateTimeField(auto_now_add=True)
+    nation = models.CharField(max_length=20, choices=NATION_CHOICES, help_text="Select your country")

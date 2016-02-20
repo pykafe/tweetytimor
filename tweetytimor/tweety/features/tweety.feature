@@ -10,8 +10,9 @@ Feature: The site should display a title
         When I visit the website
         Then some text is visible
             | text             |
-            | say something... |
+            | Say Something:   |
         Then a text entry box is visible
+        Then select only country
         Then an Add button is visible
 
     Scenario: I can add tweeties to the site
@@ -28,3 +29,11 @@ Feature: The site should display a title
             | text |
             | Diak ka lae? |
 
+    Scenario:I visit the all history
+        When I visit the website
+        Then an Add button is visible
+        When I click tha button history
+        Then I see on page history
+        Then an Add button is visible
+        When I clik the button add
+        Then I am on page add comment
