@@ -3,5 +3,5 @@ Feature: Mario's feature
         When I visit the website
         Then typing text into the entry box changes the character count displayed
             | text         | count |
-            | Diak ka lae? | 12    | 
-            | Diak loos    | 21    | 
+            | Diak ka lae? | 188   | 
+            | Diak loos    | 191   | 
