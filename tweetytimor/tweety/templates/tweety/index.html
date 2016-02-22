@@ -53,11 +53,20 @@
             </div>
             <div id="history" class = "row">
                 <div class="col-md-12">
-                     <h3> All History</h3>
+                    <h4>Total
+                        <span class="badge">
+                            {{ total_tweets }}
+                        </span>
+                        {% if total_tweets == 1 %} 
+                            Tweets
+                        {%elif total_tweets == 0 %} 
+                            no comment 
+                        {% else %} Tweets {% endif %}
+                    </h4>
                      <ul>
                          {% for tweet_history in tweets_histories %}
-                         <li>
-                            <span>{{ tweet_history.comment }}</span>
+                         <li class="tweet">
+                            <p>{{ tweet_history.comment }}</p>
                             <i>{{ tweet_history.created_on }}</i>
                          </li>
                          {% endfor %}
@@ -65,7 +74,7 @@
                 </div>
             </div>
 
-            <button id="toggle_history" class="btn btn-success">Show all History</button>
+            <button id="toggle_history" class="btn btn-default">Show all History</button>
         </div>
         
         <script type="text/javascript">
