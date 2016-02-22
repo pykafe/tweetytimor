@@ -4,14 +4,13 @@ from behave import when, then
 @then(u'the tweety text is visible') #noqa
 def impl(context):
     # find the list of comments - an unordered list <ul> - use find_by_tag
-    tweetlist = context.browser.find_by_tag('h2').first
+    tweetlist = context.browser.find_by_id('tweety').first
     # find the list of comments - an unordered list <ul> - use find_by_tag
     assert tweetlist
     # for every row in the context table
     for row in context.table:
     # assert that an element exists IN THE list of comments with text from the table
-        text = row['text']
-        assert tweetlist.find_by_text(text)
+        assert tweetlist.find_by_text(row['text'])
 
 @when(u'I click the add button') #noqa
 def impl(context):
@@ -53,7 +52,7 @@ def impl(context):
 
 @when(u'I clik the button add') #noqa
 def impl(context):
-    context.browser.find_by_css('button #toggle_comment').click()
+    context.browser.find_by_css('#toggle_comment').click()
 
 @when(u'I click tha button history') #noqa
 def impl(context):

@@ -15,7 +15,7 @@ class TweetyTimor(models.Model):
 
     comment = models.TextField(max_length=1000)
     created_on = models.DateTimeField(auto_now_add=True)
-    nation = models.CharField(max_length = 20, choices = NATION_CHOICES, help_text = "Select your country")
+    nation = models.CharField(max_length = 20, choices = NATION_CHOICES, help_text = "Select your country", null=True, blank=True)
     photo = models.ImageField(null=True, blank=True, help_text="Select your image")
 
 

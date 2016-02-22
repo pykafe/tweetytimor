@@ -35,7 +35,7 @@
                             <div class = "col-md-12">
                                 <p><button id="toggle_history" class="btn btn-default">Show all History</button></p>
                                 <p>
-                                    <h4> Say Something: </h4>
+                                    <h4>Say Something:</h4>
                                 </p>
                                 <form class="login_box" action="." method="post">
                                     {% csrf_token %}
@@ -56,7 +56,7 @@
                             </div>
                         </div>
                         <hr>
-                        <ul>
+                        <ul id="tweety">
                             {% for tweet in tweets %}
                             <li>
                                 <p>
