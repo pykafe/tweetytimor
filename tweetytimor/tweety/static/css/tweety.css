@@ -4,6 +4,26 @@ body{
 
 }
 
+form {
+    text-align: center;
+}
+
+li.tweet {
+    background-color: #e6f2ff;
+    margin-bottom: 3px;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+li.tweet p {
+   margin-bottom: 2px; 
+}
+
+li.tweet span {
+    font-size: smaller;
+    font-style: italic;
+}
+
 .btn-primary {
     background-color: #0ea1e2;
 
