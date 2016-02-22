@@ -4,12 +4,20 @@ body{
 
 }
 
+button#add_tweet, button#toggle_history, .badge, .navbar {
+    background-color: #6FAD2B;
+}
+
+.navbar {
+    color: White;
+}
+
 form {
     text-align: center;
 }
 
 li.tweet {
-    background-color: #F8F8F8 ;
+    background-color: #B3F36D ;
     margin-bottom: 3px;
     border-radius: 3px;
     padding: 5px;
@@ -41,7 +49,7 @@ li.tweets-history {
 }
 
 footer {
-    background-color: Teal;
+    background-color: #6FAD2B;
     text-align:center;
     height: 150px;
     margin-top:10px;
