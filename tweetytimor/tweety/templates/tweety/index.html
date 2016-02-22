@@ -12,73 +12,74 @@
     <body>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
-                <h2>Hello Tweety Timor</h2>
-                <button id="toggle_history">Show all History</button>
+                <h2>Hello Tweety Timor</h2> 
             </div>
         </nav>
-        <div>
-            <div class ="container">
-                <div class="panel-body">
-                    <div id="tweetdisplay" class="nav nav-pills">
-                        <div class = "row">
-                            <div class = "col-md-12">
-                                <p>
-                                    <h4> Say Something : </h4>
-                                </p>
-                                <form action="." method="post">
-                                    {% csrf_token %}
-                                    <p>{{ form.comment }}</p>
-                                    <p>{{ form.comment.errors }}</p>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
+        
+        <div class="container-fluid">
+            <button id="toggle_history" class="btn btn-success">Show all History</button>
+        </div>
+        
+        <div class ="container">
+            <div class="panel-body">
+                <div id="tweetdisplay" class="nav nav-pills">
+                    <div class = "row">
+                        <div class = "col-md-4">
+                            <p>
+                                <h4> Say Something : </h4>
+                            </p>
+                            <form action="." method="post">
+                                {% csrf_token %}
+                                <p>{{ form.comment }}</p>
+                                <p>{{ form.comment.errors }}</p>
                                 <button id="add_tweet" class="btn btn-primary">Add Comment</button>
-                            </div>
+                            </form>
                         </div>
-                        <hr>
-                        <ul>
-                            {% for tweet in tweets %}
-                            <li>
-                                <p>{{ tweet.comment }}</p>
-                                <span class="badge">
-                                   <p><i> Created on {{ tweet.created_on }} </i></p>
-                                </span>
-                                <hr>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                        <p>
-                            <h3>Total
-                                <span class="badge"> 
-                                    {{ total_tweets }}
-                                </span>
-                                {% if total_tweets == 1 %} 
-                                    Tweets
-                                {%elif total_tweets == 0 %} 
-                                    no comment 
-                                {% else %} Tweets {% endif %}
-                            </h3>
-                        </p>
+                        <div class="col-md-8">
+                            <h4>List of Tweets : </h4>
+                            <ul>
+                                {% for tweet in tweets %}
+                                <li>
+                                    <p>{{ tweet.comment }}</p>
+                                    <span class="badge">
+                                       <p><i> Created on {{ tweet.created_on }} </i></p>
+                                    </span>
+                                    <hr>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     </div>
-                    <div id="history" class = "row">
-                        <div class="col-md-12">
-                             <h3> All History</h3>
-                             <ul>
+                    <hr>
+                    <p>
+                        <h3>Total
+                            <span class="badge">
+                                {{ total_tweets }}
+                            </span>
+                            {% if total_tweets == 1 %} 
+                                Tweets
+                            {%elif total_tweets == 0 %} 
+                                no comment 
+                            {% else %} Tweets {% endif %}
+                        </h3>
+                    </p>
+                </div>
+                <div id="history" class = "row">
+                    <div class="col-md-12">
+                         <h3> All History</h3>
+                         <ul>
                              {% for tweet_history in tweets_histories %}
-                                 <li>
-                                    <span>{{ tweet_history.comment }}</span>
-                                    <i>{{ tweet_history.created_on }}</i>
-                                 </li>
+                             <li>
+                                <span>{{ tweet_history.comment }}</span>
+                                <i>{{ tweet_history.created_on }}</i>
+                             </li>
                              {% endfor %}
-                             </ul>
-                        </div>
+                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-
+        
         <script type="text/javascript">
             $(document).ready(function(){
                 $('#history').hide();
@@ -95,8 +96,19 @@
         </script>
 
         <footer class="footer">
-             Copyright &copy; <a href="https://github.com/catalpainternational/">Catalpa International</a> 2016
+            <p>Proudly developed by:</p>
+            <p>
+                <a href="https://github.com/eraulo" target="blank">Eraulo</a>, 
+                <a href="https://github.com/MarioAP" target="blank">MarioAP</a>, 
+                <a href="https://github.com/Lebanan" target="blank">Lebanan</a>, 
+                <a href="https://github.com/Joanico-Barros" target="blank">Joanico-Barros</a> & 
+                <a href="https://github.com/marobo" target="blank">Marobo</a> | 
+                <a href="http://www.catalpa.io" target="blank">Catalpa International Ltd</a>
+            </p>
+            <p>
+                Copyright &copy; <a href="https://github.com/catalpainternational/">Catalpa International</a> 2016
+            </p>
         </footer>
-         
+
     </body>
 </html>
