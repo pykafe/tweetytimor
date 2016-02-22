@@ -15,7 +15,13 @@
                     </div>
                 </div>
             </form>
-            <p> There is {{ count_tweets }}
+
+            {% if count_tweets = 1 %}
+                <p>there is {{ count_tweets }} tweet</p>
+            {% else %}
+                <p>there are {{ count_tweets }} tweets</p>
+            {% endif %}
+
             <ul>
                 {% for tweet in tweets %}
                 <li>{{ tweet.comment }}</li>
