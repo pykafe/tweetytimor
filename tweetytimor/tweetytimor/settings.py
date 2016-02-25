@@ -107,3 +107,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 TEST_RUNNER = 'django_behave.runner.DjangoBehaveTestSuiteRunner'
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR + '/media/'

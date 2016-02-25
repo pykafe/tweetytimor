@@ -1,11 +1,18 @@
 body{
     font-family:"Gill Sans Extrabold", Helvetica, sans-serif;
-	background-color:#FFFFFF;
+	background-color:silver;
 
 }
 
-button#add_tweet, button#toggle_history, .badge, .navbar {
-    background-color: #6FAD2B;
+button#add_tweet, .badge, .navbar {
+    background-color: teal;
+}
+
+button#toggle_history {
+    background-color: teal;
+    position: relative;
+    left: 975px;
+    
 }
 
 .navbar {
@@ -17,7 +24,7 @@ form {
 }
 
 li.tweet {
-    background-color: #B3F36D ;
+    background-color: white;
     margin-bottom: 3px;
     border-radius: 3px;
     padding: 5px;
@@ -33,14 +40,9 @@ li.tweet span {
 }
 
 li.tweets-history {
-    background-color: #F8F8F8;
+    background-color: #77BFC7;
     
     padding: 5px;
-}
-
-.btn-primary {
-    background-color: #0ea1e2;
-
 }
 
 #pagefooter{
@@ -49,12 +51,12 @@ li.tweets-history {
 }
 
 footer {
-    background-color: #6FAD2B;
+    background-color: teal;
     text-align:center;
     height: 150px;
-    margin-top:10px;
-    padding:40px;
-    color:#ffffff;
+    margin-top: 10px;
+    padding: 40px;
+    color: #ffffff;
     
 }
 

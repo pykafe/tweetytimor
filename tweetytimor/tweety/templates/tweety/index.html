@@ -21,11 +21,12 @@
                 <div class="row">
                     <div class="col-md-4">
                         <h4>Say Something :</h4>
-
-                        <form action="." method="post">
+                        <form action="." method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             {{ form.comment }}
                             {{ form.comment.errors }}
+                            {{ form.photo }}
+                            {{ form.photo.errors }}
                             <button id="add_tweet" class="btn btn-primary">Add Comment</button>
                         </form>
                     </div>
@@ -43,7 +44,10 @@
                         <ul>
                             {% for tweet in tweets %}
                             <li class="tweet">
-                                <p>{{ tweet.comment }}</p>
+                                {% if tweet.photo %}
+                                    <img src="{{ MEDIA_URL }}{{ tweet.photo }}" class="img-circle circle-border" width=50 height=50/>  
+                                {% endif %}                   
+                                <p>{{ tweet.comment|capfirst }}</p>
                                 <span>Created on {{ tweet.created_on }}</span>
                             </li>
                             {% endfor %}
@@ -63,15 +67,18 @@
                             no comment 
                         {% else %} Tweets {% endif %}
                     </h4>
-                     <ul>
-                         {% for tweet_history in tweets_histories %}
-                         <li class="tweet">
-                            <p>{{ tweet_history.comment }}</p>
+                    <ul>
+                        {% for tweet_history in tweets_histories %}
+                        <li class="tweet">
+                            {% if tweet.photo %}
+                                <img src="{{ MEDIA_URL }}{{ tweet.photo.url }}" class="img-circle circle-border" width=50 height=50/>  
+                            {% endif %} 
+                            <p>{{ tweet_history.comment|capfirst }}</p>
                             <i>{{ tweet_history.created_on }}</i>
-                         </li>
-                         {% endfor %}
-                     </ul>
-                </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>  
             </div>
 
             <button id="toggle_history" class="btn btn-primary">Show all History</button>
