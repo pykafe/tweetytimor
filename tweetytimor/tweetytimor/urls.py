@@ -14,10 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 from django.conf.urls import url
+from django.contrib import admin
 from tweety.views import AddTweet
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    url(r'^$', AddTweet.as_view(), name="index"),
+    url(r'^admin/', admin.site.urls),
+    url(r'^$', AddTweet.as_view(), name="tweety"),
 ]
