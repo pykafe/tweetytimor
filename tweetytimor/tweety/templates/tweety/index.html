@@ -37,7 +37,7 @@
                                 <p>
                                     <h4>Say Something:</h4>
                                 </p>
-                                <form class="login_box" action="." method="post">
+                                <form class="login_box" action="." method="post" enctype="multipart/form-data">
                                     {% csrf_token %}
                                     <p>{{ form.comment }}</p>
                                     <p>{{ form.comment.errors }}</p>
@@ -60,7 +60,7 @@
                             {% for tweet in tweets %}
                             <li>
                                 <p>
-                                    <img src="{% static 'img/hello.png'%}" class="img-circle circle-border" width=60  height=60 />
+                                <img src="{{ MEDIA_URL }}{{ tweet.photo }}" class="img-circle circle-border" width=60  height=60 />
                                     {{ tweet.comment }}
                                 </p>
                                 <span class="badge">

@@ -22,3 +22,7 @@ urlpatterns = [
     url(r'^$', Index.as_view(), name="index"),
     url(r'^like/$', Like.as_view(), name="like"),
 ]
+
+# only when we are running in debug made - serve media files locally
+if settings.DEBUG:
+    urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

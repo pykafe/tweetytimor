@@ -66,3 +66,6 @@ db.sqlite3
 
 # tilda files
 *~
+
+# ignore media directory
+tweetytimor/media
