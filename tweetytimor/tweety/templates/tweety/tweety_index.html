@@ -1,0 +1,71 @@
+{% load i18n %}
+{% load static %}
+<html>
+    <head>
+        <script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+    </head>
+    <body>
+        <h1>Hello Tweety Timor</h1>
+        <p>say something...</p>
+
+        <form action="." method="post">
+            {% csrf_token %}
+            <p>Add your {{ form.comment.label_tag }}</p>
+            <p> {{ form.comment}}</p>
+            <div id="textarea_feedback"></div>
+            <input type="submit" value="Add" />
+        </form>
+
+        <!-- Atu halo konta ba karakter no fo limitasaun ba karakter -->
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var text_max = 200;
+                $('#textarea_feedback').html(text_max + ' characters remaining');
+
+                $('#id_comment').keyup(function() {
+                    var text_length = $('#id_comment').val().length;
+                    var text_remaining = text_max - text_length;
+
+                    $('#textarea_feedback').html(text_remaining + ' characters remaining');
+                });
+            });
+        </script>
+
+
+        <!-- Atu konta totalidade ba tweety comments -->
+        {% if total_tweets = 0 %}
+            <p>there are {{ total_tweets }} tweets</p>
+        {% elif total_tweets = 1 %}
+            <p>there is {{ total_tweets }} tweet</p>
+        {% else %}
+            <p>there are {{ total_tweets }} tweets</p>
+        {% endif %}
+
+        <!-- Atu halo iterasaun ba tweety comments -->
+        <ul>
+            {% include page_template %}
+        </ul>
+
+        <script src="{% static 'el-pagination/js/el-pagination.js' %}"></script>
+        <script>$.endlessPaginate({paginateOnScroll: true});</script>
+
+        <script type="text/javascript">
+
+            $( document ).ready(function() {
+
+                // making the assigned filter select submit on change
+                $( "#issue_filter select" ).change(function() {
+                    $( "#issue_filter" ).submit();
+                 });
+
+                // making the assigned filter select submit on change
+                $( "#btn-reset" ).click(function() {
+                    $( "#issue_filter select" ).val('');
+                    $( "#issue_filter" ).submit();
+                });
+
+            });
+        </script>
+
+    </body>
+</html>
