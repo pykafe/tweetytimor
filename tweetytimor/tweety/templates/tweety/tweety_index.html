@@ -43,16 +43,13 @@
 
         <!-- Atu halo iterasaun ba tweety comments -->
         <ul>
-            {% for tweet in tweets %}
-            <li>{{ tweet.comment }}</li>
-            {% endfor %}
+            {% include page_template %}
         </ul>
 
-        <script type="text/javascript">
+        <script src="{% static 'el-pagination/js/el-pagination.js' %}"></script>
+        <script>$.endlessPaginate({paginateOnScroll: true});</script>
 
-            $.endlessPaginate({
-                paginateOnScroll: true,
-            });
+        <script type="text/javascript">
 
             $( document ).ready(function() {
 
