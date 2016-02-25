@@ -1,6 +1,11 @@
+from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView
 from tweety.models import TweetyTimor
 from django.core.urlresolvers import reverse_lazy
+
+
+class CSSTest(TemplateView):
+    template_name = "tweety/csstest.html"
 
 
 class Index(CreateView):

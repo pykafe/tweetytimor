@@ -14,10 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 from django.conf.urls import url
-from tweety.views import Index
+from tweety.views import Index, CSSTest
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^$', Index.as_view(), name="index"),
+    url(r'^css', CSSTest.as_view(), name="css"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
