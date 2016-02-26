@@ -1,5 +1,6 @@
 from django.views.generic.edit import CreateView
 from tweety.models import TweetyTimor, TweetyLike
+from .forms import LikeForm
 from django.core.urlresolvers import reverse_lazy
 
 
@@ -15,6 +16,7 @@ class Index(CreateView):
         context['tweets_histories'] = TweetyTimor.objects.order_by('-created_on')
         context['total_tweets'] = TweetyTimor.objects.count()
         context['like_tweets'] = TweetyLike.objects.count()
+        context['like_form'] = LikeForm()
         return context
 
 

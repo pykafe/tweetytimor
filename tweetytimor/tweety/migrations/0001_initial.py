@@ -23,8 +23,8 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('comment', models.TextField(max_length=1000)),
                 ('created_on', models.DateTimeField(auto_now_add=True)),
-                ('photo', models.ImageField(null=True, upload_to=b'', blank=True)),
-                ('nation', models.CharField(help_text='Select your country', max_length=20, choices=[('', 'All Country'), ('timor-leste', 'Timor-Leste'), ('usa', 'USA'), ('england', 'England'), ('australia', 'Australia')])),
+                ('nation', models.CharField(blank=True, max_length=20, null=True, help_text='Select your country', choices=[('', 'All Country'), ('timor-leste', 'Timor-Leste'), ('usa', 'USA'), ('england', 'England'), ('australia', 'Australia')])),
+                ('photo', models.ImageField(help_text='Select your image', null=True, upload_to=b'', blank=True)),
             ],
         ),
     ]
