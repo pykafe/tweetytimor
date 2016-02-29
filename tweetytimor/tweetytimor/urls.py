@@ -13,14 +13,17 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
-from django.conf.urls import url
-from tweety.views import Index, Like
+from django.conf.urls import url, include
+from tweety.views import Index, Like, CreateTweetyUser
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
     url(r'^$', Index.as_view(), name="index"),
-    url(r'^like/$', Like.as_view(), name="like"),
+    url(r'^like/$', login_required(Like.as_view()), name="like"),
+    url(r'^create/$', CreateTweetyUser.as_view(), name="create"),
+    url(r'^accounts/', include('django.contrib.auth.urls')),
 ]
 
 # only when we are running in debug made - serve media files locally

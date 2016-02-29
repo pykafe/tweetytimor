@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 
 class TweetyTimor(models.Model):
@@ -22,3 +23,7 @@ class TweetyTimor(models.Model):
 class TweetyLike(models.Model):
 
     like = models.EmailField(max_length=254)
+
+
+class TweetyCreated(AbstractUser):
+    password_email = models.EmailField(max_length=254)

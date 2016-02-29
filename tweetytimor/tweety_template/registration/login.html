@@ -1,0 +1,20 @@
+{% extends 'registration/base.html' %}
+
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+    Tweety-Login
+{% endblock %}
+
+{% block content %}
+
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{next}}"/>
+            <p>{{form.username}}</p>
+            <p>{{form.password}}</p>
+            <button type="submit">Login</button>
+        </form>
+
+{% endblock %}

@@ -16,9 +16,19 @@
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                     <h2>Hello Tweety Timor</h2>
-                    <p class="badge">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Like</button>
 
+                    {% if user.is_authenticated %}
+                        <span class="badge">
+                            {{user|capfirst}}
+                        </span>
+                         <a href="{% url 'logout' %}">Logout</a>
+                    {% else %}
+                        <a href="{% url 'create' %}">Create</a>
+                        <a href="{% url 'login' %}">Login</a>
+                    {% endif %}
+
+                    <p class="badge">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Like</button>
                              {{like_tweets}}
                         {% if like_tweets == 1 %}
                             People
@@ -31,7 +41,7 @@
                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
-                                    <div class="modal-header">
+                                    <div class="modal-header like" >
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                             <h4 class="modal-title" id="exampleModalLabel">New email</h4>
                                     </div>
@@ -54,18 +64,19 @@
                     </p>
             </div>
         </nav>
-        <div>
 
+        <div>
+        {% if user.is_authenticated %}
             <div class ="container">
                 <div class="panel-body">
                     <div id="tweetdisplay" class="nav nav-pills">
-                        <div class = "row">
-                            <div class = "col-md-12">
+                        <div class = "row" id="body_box">
+                            <div class = "col-md-4">
                                 <p><button id="toggle_history" class="btn btn-default">Show all History</button></p>
                                 <p>
                                     <h4>Say Something:</h4>
                                 </p>
-                                <form class="login_box" action="." method="post" enctype="multipart/form-data">
+                                <form action="." method="post" enctype="multipart/form-data">
                                     {% csrf_token %}
                                     <p>{{ form.comment }}</p>
                                     <p>{{ form.comment.errors }}</p>
@@ -75,45 +86,34 @@
                                     <p>{{ form.photo.help_text }}:</p>
                                     <p>{{ form.photo }}</p>
                                     <p>{{ form.photo.errors }}</p>
+                                    <button id="add_tweet" class="btn btn-primary">Add Comment</button>
                                 </form>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button id="add_tweet" class="btn btn-primary">Add Comment</button>
+                            <div class="col-md-8">
+                                 <h3>Total
+                                    <span class="badge"> 
+                                        {{ total_tweets }}
+                                     </span>
+                                        {% if total_tweets == 1 %} 
+                                             Tweets
+                                        {%elif total_tweets == 0 %} 
+                                            no comment 
+                                        {% else %} Tweets {% endif %}
+                                            :
+                                    </h3>
+                                {% for tweet in tweets %}
+                                     <p>
+                                    <img src="{{ MEDIA_URL }}{{ tweet.photo }}" class="img-circle circle-border" width=60  height=60 />
+                                    {{ tweet.comment }}
+                                     </p>
+                                     <p><i>It's tweety from {{tweet.nation|capfirst}} and Created on {{ tweet.created_on}}</i></p>
+                                {% endfor %}
                             </div>
                         </div>
-                        <hr>
-                        <ul id="tweety">
-                            {% for tweet in tweets %}
-                            <li>
-                                <p>
-                                <img src="{{ MEDIA_URL }}{{ tweet.photo }}" class="img-circle circle-border" width=60  height=60 />
-                                    {{ tweet.comment }}
-                                </p>
-                                <span class="badge">
-                                    <p><i>It's tweety from {{tweet.nation|capfirst}} and Created on {{ tweet.created_on}}</i></p>
-                                </span>
-                                <hr>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                        <p>
-                            <h3>Total
-                                <span class="badge"> 
-                                    {{ total_tweets }}
-                                </span>
-                                {% if total_tweets == 1 %} 
-                                    Tweets
-                                {%elif total_tweets == 0 %} 
-                                    no comment 
-                                {% else %} Tweets {% endif %}
-                            </h3>
-                        </p>
                     </div>
 
                     <div id="history" class = "row">
-                        <div class="col-md-12">
+                        <div class="col-md-12" id="body_box">
                              <button id="toggle_comment" class="btn btn-default">Add your comment</button>
                              <h3> All History</h3>
                              <ul>
@@ -121,7 +121,7 @@
                                  <li>
                                     <p>{{ tweet_history.comment }}</p>
                                     <span class="badge">
-                                         <p><i>It's tweety from {{tweet_history.nation|capfirst}} and Created on{{ tweet_history.created_on }}</i></span>
+                                         <i>It's tweety from {{tweet_history.nation|capfirst}} and Created on{{ tweet_history.created_on }}</i></span>
                                     </span>
                                  </li>
                              {% endfor %}
@@ -131,6 +131,56 @@
                 </div>
             </div>
         </div>
+
+        {% else %}
+
+        <div class="container">
+            <div class="panel-body">
+                <div id="tweetdisplay_1" class="nav nav-pills">
+                    <div class="row" id="body_box">
+                        <div class="col-md-12">
+                            <p><button id="toggle_history" class="btn btn-default">Show all History</button></p>
+                            <h3>Total
+                                <span class="badge"> 
+                                    {{ total_tweets }}
+                                </span>
+                                {% if total_tweets == 1 %} 
+                                    Tweets
+                                {%elif total_tweets == 0 %} 
+                                    no comment 
+                                {% else %} Tweets {% endif %}
+                                            :
+                            </h3>
+                            {% for tweet in tweets %}
+                                <p>
+                                    <img src="{{ MEDIA_URL }}{{ tweet.photo }}" class="img-circle circle-border" width=60  height=60 />
+                                {{ tweet.comment }}
+                                </p>
+                                <p><i>It's tweety from {{tweet.nation|capfirst}} and Created on {{ tweet.created_on}}</i></p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                     <div id="history_1" class = "row">
+                        <div class="col-md-12" id="body_box">
+                             <button id="toggle_comment" class="btn btn-default">Add your comment</button>
+                             <h3> All History</h3>
+                             <ul>
+                             {% for tweet_history in tweets_histories %}
+                                 <li>
+                                    <p>{{ tweet_history.comment }}</p>
+                                    <span class="badge">
+                                         <i>It's tweety from {{tweet_history.nation|capfirst}} and Created on{{ tweet_history.created_on }}</i></span>
+                                    </span>
+                                 </li>
+                             {% endfor %}
+                             </ul>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+        {% endif %}
 
         <script type="text/javascript">
             $(document).ready(function(){
@@ -142,6 +192,16 @@
                 $("#toggle_comment").click(function() {
                     $( "#history" ).slideToggle( "fast" );
                     $( "#tweetdisplay" ).slideToggle( "fast" );
+                });
+
+                $('#history_1').hide();
+                $("#toggle_history").click(function() {
+                    $( "#history_1" ).slideToggle( "fast" );
+                    $( "#tweetdisplay_1" ).slideToggle( "fast" );
+                });
+                $("#toggle_comment").click(function() {
+                    $( "#history_1" ).slideToggle( "fast" );
+                    $( "#tweetdisplay_1" ).slideToggle( "fast" );
                 });
 
                 $('#add_tweet').click(function(){

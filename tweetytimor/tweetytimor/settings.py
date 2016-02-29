@@ -57,7 +57,7 @@ ROOT_URLCONF = 'tweetytimor.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, "tweety_template")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -111,7 +111,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
         os.path.join(BASE_DIR, 'project_static'),
 )
-MEDIA_URL = '/MEDIA/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR + '/media/'
 
 TEST_RUNNER = 'django_behave.runner.DjangoBehaveTestSuiteRunner'
+AUTH_USER_MODEL = 'tweety.TweetyCreated'

@@ -1,5 +1,5 @@
-from django.views.generic.edit import CreateView
-from tweety.models import TweetyTimor, TweetyLike
+from django.views.generic.edit import CreateView, ModelFormMixin
+from tweety.models import TweetyTimor, TweetyLike, TweetyCreated
 from .forms import LikeForm
 from django.core.urlresolvers import reverse_lazy
 
@@ -25,3 +25,16 @@ class Like(CreateView):
     fields = ['like']
     template_name = "tweety/like.html"
     success_url = reverse_lazy('index')
+
+
+class CreateTweetyUser(CreateView):
+    model = TweetyCreated
+    fields = ['first_name', 'last_name', 'username', 'password', 'email', 'password_email']
+    template_name = "tweety/create.html"
+    success_url = reverse_lazy('index')
+
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.set_password(self.object.password)
+        self.object.save()
+        return super(ModelFormMixin, self).form_valid(form)
