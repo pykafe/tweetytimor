@@ -18,6 +18,6 @@ class Index(CreateView):
     def get_context_data(self, **kwargs):
         context = super(Index, self).get_context_data(**kwargs)
         context['tweets'] = TweetyTimor.objects.all()
-        context['count_tweets'] = TweetyTimor.objects.count()
+        context['total_tweets'] = TweetyTimor.objects.count()
         context['page_template'] = self.page_template_name
         return context

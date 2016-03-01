@@ -33,9 +33,9 @@
 
 
         <!-- Atu konta totalidade ba tweety comments -->
-        {% if total_tweets = 0 %}
+        {% if total_tweets == 0 %}
             <p>there are {{ total_tweets }} tweets</p>
-        {% elif total_tweets = 1 %}
+        {% elif total_tweets == 1 %}
             <p>there is {{ total_tweets }} tweet</p>
         {% else %}
             <p>there are {{ total_tweets }} tweets</p>
@@ -63,7 +63,6 @@
                     $( "#issue_filter select" ).val('');
                     $( "#issue_filter" ).submit();
                 });
-
             });
         </script>
 
