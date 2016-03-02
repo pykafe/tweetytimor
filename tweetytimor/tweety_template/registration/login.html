@@ -8,15 +8,20 @@
 {% endblock %}
 
 {% block content %}
-
+    <div class="login_box">
+        <h1>User Login</h1>
         <form action="{% url 'login' %}" method="post">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{next}}"/>
+            {% if form.errors %}
+                <p>Your username and password didn't match. Please try again.</p>
+            {% endif %}
             <p>{{form.username.label_tag}}</p>
             <p>{{form.username}}</p>
             <p>{{form.password.label_tag}}</p>
             <p>{{form.password}}</p>
-            <button type="submit">Login</button>
+            <button type="submit" class="btn btn-primary">Login</button>
         </form>
+    </div>
 
 {% endblock %}

@@ -117,5 +117,7 @@ MEDIA_ROOT = BASE_DIR + '/media/'
 
 LOGIN_REDIRECT_URL = '/'
 
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+
 TEST_RUNNER = 'django_behave.runner.DjangoBehaveTestSuiteRunner'
 AUTH_USER_MODEL = 'tweety.TweetyCreated'

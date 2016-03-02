@@ -17,6 +17,14 @@
             <div class="container-fluid">
                     <h2>Hello Tweety Timor</h2>
 
+                        {% if messages %}
+                             <ul class="messages">
+                                 {% for message in messages %}
+                                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                 {% endfor %}
+                             </ul>
+                        {% endif %}
+
                     {% if user.is_authenticated %}
                         <span class="badge">
                             {{user|capfirst}}
@@ -163,7 +171,7 @@
                 </div>
                      <div id="history_1" class = "row">
                         <div class="col-md-12" id="body_box">
-                             <button id="toggle_comment" class="btn btn-default">Add your comment</button>
+                             <button id="toggle_comment" class="btn btn-default">Show all comment</button>
                              <h3> All History</h3>
                              <ul>
                              {% for tweet_history in tweets_histories %}
@@ -180,6 +188,14 @@
             </div>
         </div>
 
+        {% endif %}
+
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
         {% endif %}
 
         <script type="text/javascript">
