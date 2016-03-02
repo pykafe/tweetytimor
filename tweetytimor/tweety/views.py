@@ -29,7 +29,7 @@ class Like(CreateView):
 
 class CreateTweetyUser(CreateView):
     model = TweetyCreated
-    fields = ['first_name', 'last_name', 'username', 'password', 'email', 'password_email']
+    fields = ['first_name', 'last_name', 'username', 'password', 'email', 'confirme_email']
     template_name = "tweety/create.html"
     success_url = reverse_lazy('index')
 
@@ -38,3 +38,8 @@ class CreateTweetyUser(CreateView):
         self.object.set_password(self.object.password)
         self.object.save()
         return super(ModelFormMixin, self).form_valid(form)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(CreateTweetyUser, self).get_context_data(*args, **kwargs)
+        context['total_users'] = TweetyCreated.objects.count()
+        return context

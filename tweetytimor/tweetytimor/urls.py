@@ -14,18 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 from django.conf.urls import url, include
-from tweety.views import Index, Like, CreateTweetyUser
 from django.conf import settings
 from django.conf.urls.static import static
-from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
-    url(r'^$', Index.as_view(), name="index"),
-    url(r'^like/$', login_required(Like.as_view()), name="like"),
-    url(r'^create/$', CreateTweetyUser.as_view(), name="create"),
+    url(r'^', include('tweety.urls')),
     url(r'^accounts/', include('django.contrib.auth.urls')),
 ]
 
 # only when we are running in debug made - serve media files locally
 if settings.DEBUG:
-    urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

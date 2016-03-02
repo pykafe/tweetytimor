@@ -109,10 +109,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'project_static'),
+        os.path.join(BASE_DIR, 'tweety_static'),
 )
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR + '/media/'
+
+LOGIN_REDIRECT_URL = '/'
 
 TEST_RUNNER = 'django_behave.runner.DjangoBehaveTestSuiteRunner'
 AUTH_USER_MODEL = 'tweety.TweetyCreated'

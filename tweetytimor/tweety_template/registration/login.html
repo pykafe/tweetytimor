@@ -12,7 +12,9 @@
         <form action="{% url 'login' %}" method="post">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{next}}"/>
+            <p>{{form.username.label_tag}}</p>
             <p>{{form.username}}</p>
+            <p>{{form.password.label_tag}}</p>
             <p>{{form.password}}</p>
             <button type="submit">Login</button>
         </form>
