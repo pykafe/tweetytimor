@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from tweety.views import AddTweet
-from django.conf import settings
-from django.conf.urls.static import static
+from tweety.views import AddTweet, LikeTweet, TweetComment
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', AddTweet.as_view(), name="tweety"),
+    url(r'^like', LikeTweet.as_view(), name="tweety"),
+    url(r'^comment', TweetComment.as_view(), name="tweety"),
+
 ]

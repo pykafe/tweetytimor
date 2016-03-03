@@ -1,0 +1,5 @@
+<form actio="." methods="POST">
+    {% csrf_token %}
+    {{ form.tweet }}
+    <input type="submit" value="Like" />
+</form>    

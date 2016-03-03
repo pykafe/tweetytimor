@@ -1,8 +1,9 @@
 {% load el_pagination_tags %}
 
 {% lazy_paginate 5 tweets %}
+
 {% for tweet in tweets %}
-<li>{{ tweet.comment }}</li>
+    <li>{{ tweet.comment }} {{ tweet.tweet }}</li>
 {% endfor %}
 
 {% show_more %}

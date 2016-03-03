@@ -1,5 +1,5 @@
 from django.views.generic.edit import CreateView
-from tweety.models import TweetyTimor
+from tweety.models import TweetyTimor, LikeTweet, TweetComment
 from django.core.urlresolvers import reverse_lazy
 
 
@@ -21,3 +21,23 @@ class AddTweet(CreateView):
         context['total_tweets'] = TweetyTimor.objects.count()
         context['page_template'] = self.page_template_name
         return context
+
+
+class LikeTweet(CreateView):
+    model = LikeTweet
+    fields = ['tweet']
+    template_name = 'tweety/like_tweet.html'
+    success_url = reverse_lazy('tweety')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(LikeTweet, self).get_context_data(*args, **kwargs)
+        context['tweets'] = LikeTweet.objects.all()
+        #context['total_like'] = LikeTweet.objects.count()
+        return context
+
+
+class TweetComment(CreateView):
+    model = TweetComment
+    fields = ['tweet', 'comment']
+    template_name = 'tweety/comment_tweet.html'
+    success_url = reverse_lazy('tweety')

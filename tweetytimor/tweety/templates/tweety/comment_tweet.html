@@ -1,0 +1,7 @@
+<form actio="." methods="POST">
+    {% csrf_token %}
+
+    {{ form.tweet }}
+    {{ form.comment }}
+    <input type="submit" value="Comment" />
+</form>    
