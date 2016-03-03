@@ -1,6 +1,8 @@
 from django.views.generic.edit import CreateView
 from tweety.models import TweetyTimor, LikeTweet, TweetComment
 from django.core.urlresolvers import reverse_lazy
+from django.db.models import Count
+from django.http import HttpResponse
 
 
 class AddTweet(CreateView):
@@ -17,23 +19,26 @@ class AddTweet(CreateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(AddTweet, self).get_context_data(*args, **kwargs)
-        context['tweets'] = TweetyTimor.objects.all()
+        context['tweets'] = TweetyTimor.objects.all().annotate(like_count=Count('liketweet'))
         context['total_tweets'] = TweetyTimor.objects.count()
         context['page_template'] = self.page_template_name
         return context
 
 
-class LikeTweet(CreateView):
+class LikeTweetView(CreateView):
     model = LikeTweet
     fields = ['tweet']
     template_name = 'tweety/like_tweet.html'
     success_url = reverse_lazy('tweety')
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(LikeTweet, self).get_context_data(*args, **kwargs)
-        context['tweets'] = LikeTweet.objects.all()
-        #context['total_like'] = LikeTweet.objects.count()
-        return context
+    def form_valid(self, form):
+        if self.request.is_ajax():
+            form.save()
+            # find out how many likes htere are and return to the user
+            count = LikeTweet.objects.filter(tweet=form.instance.tweet_id).count()
+            return HttpResponse(str(count), status=201)
+        else:
+            return super(LikeTweetView, self).form_valid(form)
 
 
 class TweetComment(CreateView):

@@ -3,7 +3,12 @@
 {% lazy_paginate 5 tweets %}
 
 {% for tweet in tweets %}
-    <li>{{ tweet.comment }} {{ tweet.tweet }}</li>
+    <li>
+        {{ tweet.comment }}
+        <button class="like_tweet" data-tweet="{{ tweet.pk }}">Like</button> 
+        <span id="like_count_{{ tweet.pk }}">{{ tweet.like_count }}</span>
+        likes
+    </li>
 {% endfor %}
 
 {% show_more %}
