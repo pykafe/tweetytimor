@@ -23,7 +23,7 @@
                         <h4>Say Something :</h4>
                         <form action="." method="post" enctype="multipart/form-data">
                             {% csrf_token %}
-                            <textarea cols="30" rows="5" id="id_comment" maxlength="1000" name="comment"></textarea>
+                            <textarea cols="47" rows="5" id="id_comment" maxlength="1000" name="comment"></textarea>
                             {{ form.comment.errors }}
                             {{ form.photo }}
                             {{ form.photo.errors }}
