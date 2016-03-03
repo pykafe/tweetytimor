@@ -1,9 +1,11 @@
-from django.conf.urls import patterns, url, include
+from django.conf.urls import url
 from django.contrib.auth.decorators import login_required
-from . import views
+from .views import TweetyCreate, LikeTweet, TweetComment, CreateMember
 
 
-urlpatterns = patterns(
-    '',
-    url(r'^$', login_required(views.Home.as_view()), name='home'),
-    )
+urlpatterns = [
+    url(r'^$', TweetyCreate.as_view(), name='tweety'),
+    url(r'^create/$', login_required(CreateMember.as_view()), name='create'),
+    url(r'^like', LikeTweet.as_view(), name='like'),
+    url(r'^comment', TweetComment.as_view(), name='comment'),
+]
