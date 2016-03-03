@@ -41,7 +41,7 @@ class LikeTweetView(CreateView):
             return super(LikeTweetView, self).form_valid(form)
 
 
-class TweetComment(CreateView):
+class TweetCommentView(CreateView):
     model = TweetComment
     fields = ['tweet', 'comment']
     template_name = 'tweety/comment_tweet.html'
