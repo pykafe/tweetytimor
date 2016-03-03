@@ -126,3 +126,5 @@ ENDLESS_PAGINATION_PER_PAGE = 4
 STATIC_URL = '/static/'
 
 TEST_RUNNER = 'django_behave.runner.DjangoBehaveTestSuiteRunner'
+
+AUTH_USER_MODEL = 'tweety.Member'
