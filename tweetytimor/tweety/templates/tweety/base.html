@@ -1,0 +1,26 @@
+{% load i18n %}
+{% load static %}
+<html>
+    <head>
+        <script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'css/tweety.css' %}" />
+        <title>
+            {% block title %}
+            {% endblock %}
+
+            {% block header %}
+            {% endblock %}
+        </title>
+    </head>
+    <body>
+        <div class="navbar">
+            <h1>Hello Tweety Timor</h1>
+            <p>say something...</p>
+        </div>
+            {% block content %}
+            {% endblock %}
+
+            {% block footer %}
+            {% endblock %}
+    </body>
+</html>

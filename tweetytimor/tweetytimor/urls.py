@@ -15,9 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from tweety.views import Index
+from django.contrib.auth.decorators import login_required
+from tweety.views import TweetyCreate, LikeTweet, TweetComment, CreateMember
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', Index.as_view(), name='index'),
+    url(r'^$', TweetyCreate.as_view(), name='tweety'),
+    url(r'^create/$', login_required(CreateMember.as_view()), name='tweety'),
+    url(r'^like', LikeTweet.as_view(), name='tweety'),
+    url(r'^comment', TweetComment.as_view(), name='tweety'),
 ]

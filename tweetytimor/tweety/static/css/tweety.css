@@ -1,0 +1,26 @@
+<style>
+    html {
+        font-family: "Trebuchet MS", Helvetica, sans-serif;
+    }
+    body {
+        margin: 10px 20px 50px 20px; /*  margin is space OUTSIDE the element */
+        padding: 5px;               /* padding is space INSIDE the element */
+        border-radius: 10px;
+    }
+    .navbar {
+        background-color: Blue;
+    }
+    .container {
+        padding: 10px;
+        margin: 5px;
+        background-color: White;
+    }
+    span {
+        padding: 5px;
+        margin: 10px;
+        background-color: Yellow;
+    }
+    ul {
+        color: Blue;
+        }
+</style>

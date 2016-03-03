@@ -1,13 +1,11 @@
-{% load i18n %}
-{% load static %}
-<html>
-    <head>
-        <script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
-    </head>
-    <body>
-        <h1>Hello Tweety Timor</h1>
-        <p>say something...</p>
+{% extends 'tweety/base.html' %}
+    {% block title %}
+    {% endblock %}
 
+    {% block header %}
+    {% endblock %}
+
+    {% block content %}
         <form action="." method="post">
             {% csrf_token %}
             <p>Add your {{ form.comment.label_tag }}</p>
@@ -16,6 +14,8 @@
             <input type="submit" value="Add" />
         </form>
 
+        <div class="container">
+        <a href="{% url 'tweety' %}">{{ form.tweet }}</a>
         <!-- Atu halo konta ba karakter no fo limitasaun ba karakter -->
         <script type="text/javascript">
             $(document).ready(function() {
@@ -33,23 +33,24 @@
 
 
         <!-- Atu konta totalidade ba tweety comments -->
-        {% if total_tweets = 0 %}
-            <p>there are {{ total_tweets }} tweets</p>
-        {% elif total_tweets = 1 %}
-            <p>there is {{ total_tweets }} tweet</p>
+        {% if count_tweets = 0 %}
+            <p>There are {{ count_tweets }} tweets</p>
+        {% elif count_tweets = 1 %}
+            <p>There is {{ count_tweets }} tweet</p>
         {% else %}
-            <p>there are {{ total_tweets }} tweets</p>
+            <p>There are {{ count_tweets }} tweets</p>
         {% endif %}
 
         <!-- Atu halo iterasaun ba tweety comments -->
         <ul>
             {% include page_template %}
         </ul>
+        {% load i18n %}
+        {% load static %}
+            <script src="{% static 'el-pagination/js/el-pagination.js' %}"></script>
+            <script>$.endlessPaginate({paginateOnScroll: true});</script>
 
-        <script src="{% static 'el-pagination/js/el-pagination.js' %}"></script>
-        <script>$.endlessPaginate({paginateOnScroll: true});</script>
-
-        <script type="text/javascript">
+            <script type="text/javascript">
 
             $( document ).ready(function() {
 
@@ -66,6 +67,7 @@
 
             });
         </script>
-
+        </div>
+        {% endblock %}
     </body>
 </html>
