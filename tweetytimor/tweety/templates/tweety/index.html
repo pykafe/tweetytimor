@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="{% static 'css/tweety.css' %}" />
         <script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js'%}"></script>
 	    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+        {{ form.media }}
     
         <title>Tweety - Timor</title>
 
@@ -112,7 +113,7 @@
                                 {% for tweet in tweets %}
                                      <p>
                                     <img src="{{ MEDIA_URL }}{{ tweet.photo }}" class="img-circle circle-border" width=60  height=60 />
-                                    {{ tweet.comment }}
+                                    {{ tweet.comment|safe }}
                                      </p>
                                      <p><i>It's tweety from {{tweet.nation|capfirst}} and Created on {{ tweet.created_on}}</i></p>
                                 {% endfor %}
@@ -127,7 +128,7 @@
                              <ul>
                              {% for tweet_history in tweets_histories %}
                                  <li>
-                                    <p>{{ tweet_history.comment }}</p>
+                                    <p>{{ tweet_history.comment|safe }}</p>
                                     <span class="badge">
                                          <i>It's tweety from {{tweet_history.nation|capfirst}} and Created on{{ tweet_history.created_on }}</i></span>
                                     </span>
@@ -162,7 +163,7 @@
                             {% for tweet in tweets %}
                                 <p>
                                     <img src="{{ MEDIA_URL }}{{ tweet.photo }}" class="img-circle circle-border" width=60  height=60 />
-                                {{ tweet.comment }}
+                                {{ tweet.comment|safe }}
                                 </p>
                                 <p><i>It's tweety from {{tweet.nation|capfirst}} and Created on {{ tweet.created_on}}</i></p>
                             {% endfor %}
@@ -176,7 +177,7 @@
                              <ul>
                              {% for tweet_history in tweets_histories %}
                                  <li>
-                                    <p>{{ tweet_history.comment }}</p>
+                                    <p>{{ tweet_history.comment|safe }}</p>
                                     <span class="badge">
                                          <i>It's tweety from {{tweet_history.nation|capfirst}} and Created on{{ tweet_history.created_on }}</i></span>
                                     </span>

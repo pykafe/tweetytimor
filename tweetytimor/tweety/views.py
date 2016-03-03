@@ -1,8 +1,9 @@
 from django.views.generic.edit import CreateView, ModelFormMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from tweety.models import TweetyTimor, TweetyLike, TweetyCreated
+from tweety.models import TweetyTimor, TweetyLike, TweetyUser
 from .forms import LikeForm
 from django.core.urlresolvers import reverse_lazy
+from tinymce.widgets import TinyMCE
 
 
 class Index(CreateView):
@@ -20,6 +21,11 @@ class Index(CreateView):
         context['like_form'] = LikeForm()
         return context
 
+    def get_form(self, form_class):
+        form = super(Index, self).get_form(form_class)
+        form.fields['comment'].widget =TinyMCE()
+        return form
+
 
 class Like(CreateView):
     model = TweetyLike
@@ -29,7 +35,7 @@ class Like(CreateView):
 
 
 class CreateTweetyUser(SuccessMessageMixin, CreateView):
-    model = TweetyCreated
+    model = TweetyUser
     fields = ['first_name', 'last_name', 'username', 'password', 'email', 'confirme_email']
     template_name = "tweety/create.html"
     success_url = reverse_lazy('index')
@@ -43,5 +49,5 @@ class CreateTweetyUser(SuccessMessageMixin, CreateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(CreateTweetyUser, self).get_context_data(*args, **kwargs)
-        context['total_users'] = TweetyCreated.objects.count()
+        context['total_users'] = TweetyUser.objects.count()
         return context

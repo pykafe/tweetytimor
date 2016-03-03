@@ -25,5 +25,5 @@ class TweetyLike(models.Model):
     like = models.EmailField(max_length=254, unique=True)
 
 
-class TweetyCreated(AbstractUser):
+class TweetyUser(AbstractUser):
     confirme_email = models.EmailField(max_length=254, unique=True, help_text="confirme your email")

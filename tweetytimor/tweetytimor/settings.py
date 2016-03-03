@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'tinymce',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -120,4 +121,4 @@ LOGIN_REDIRECT_URL = '/'
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
 TEST_RUNNER = 'django_behave.runner.DjangoBehaveTestSuiteRunner'
-AUTH_USER_MODEL = 'tweety.TweetyCreated'
+AUTH_USER_MODEL = 'tweety.TweetyUser'
