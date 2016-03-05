@@ -111,11 +111,17 @@
                                             :
                                     </h3>
                                 {% for tweet in tweets %}
+                                    {% if tweet.photo %}
                                      <p>
-                                    <img src="{{ MEDIA_URL }}{{ tweet.photo }}" class="img-circle circle-border" width=60  height=60 />
+                                     <img src="{{ MEDIA_URL }}{{ tweet.photo}}" class="img-circle circle-border" width=60  height=60 />
+                                    {% endif %}
                                     {{ tweet.comment|safe }}
                                      </p>
+                                    {% if tweet.nation %}
                                      <p><i>It's tweety from {{tweet.nation|capfirst}} and Created on {{ tweet.created_on}}</i></p>
+                                    {% else %}
+                                    <p><i>Created on {{tweet.created_on}}</i></p>
+                                    {% endif %}
                                 {% endfor %}
                             </div>
                         </div>
@@ -130,7 +136,11 @@
                                  <li>
                                     <p>{{ tweet_history.comment|safe }}</p>
                                     <span class="badge">
-                                         <i>It's tweety from {{tweet_history.nation|capfirst}} and Created on{{ tweet_history.created_on }}</i></span>
+                                        {% if tweet_history.nation %}
+                                         <i>It's tweety from {{tweet_history.nation|capfirst}} and Created on {{ tweet_history.created_on }}</i>
+                                        {% else %}
+                                         <i>Created on {{ tweet_history.created_on }}</i>
+                                        {% endif %}
                                     </span>
                                  </li>
                              {% endfor %}
@@ -162,10 +172,16 @@
                             </h3>
                             {% for tweet in tweets %}
                                 <p>
+                                {% if tweet.photo %}
                                     <img src="{{ MEDIA_URL }}{{ tweet.photo }}" class="img-circle circle-border" width=60  height=60 />
+                                {% endif %}
                                 {{ tweet.comment|safe }}
                                 </p>
-                                <p><i>It's tweety from {{tweet.nation|capfirst}} and Created on {{ tweet.created_on}}</i></p>
+                                {% if tweet.nation %}}
+                                    <p><i>It's tweety from {{tweet.nation|capfirst}} and Created on {{ tweet.created_on}}</i></p>
+                                {% else %}
+                                    <p><i>Created on {{tweet.created_on}}</i></p>
+                                {% endif %}
                             {% endfor %}
                         </div>
                     </div>
@@ -179,7 +195,11 @@
                                  <li>
                                     <p>{{ tweet_history.comment|safe }}</p>
                                     <span class="badge">
-                                         <i>It's tweety from {{tweet_history.nation|capfirst}} and Created on{{ tweet_history.created_on }}</i></span>
+                                        {% if tweet_history.nation %}
+                                            <i>It's tweety from {{tweet_history.nation|capfirst}} and Created on {{ tweet_history.created_on }}</i>
+                                        {% else %}
+                                            <i>Created on {{ tweet_history.created_on }}</i>
+                                        {% endif %}
                                     </span>
                                  </li>
                              {% endfor %}
