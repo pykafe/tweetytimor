@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
         <link rel="stylesheet" href="{% static 'css/tweety.css' %}" />
         <script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js'%}"></script>
-    
+        {{ form.media }}
         <title>Tweety - Timor</title>
     </head>
     <body>
@@ -20,15 +20,23 @@
             <div id="tweetdisplay" >
                 <div class="row">
                     <div class="col-md-4">
-                        <h4>Say Something :</h4>
-                        <form action="." method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <textarea cols="47" rows="5" id="id_comment" maxlength="1000" name="comment"></textarea>
-                            {{ form.comment.errors }}
-                            {{ form.photo }}
-                            {{ form.photo.errors }}
-                            <button id="add_tweet" class="btn btn-primary">Add Comment</button>
-                        </form>
+                       <h4>Say Something :</h4>   
+                           <form action="." method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ form.comment }}
+                                {{ form.comment.errors }} 
+                                 <div class ="container-fluid">
+                                     <div class="row">
+                                        <div class="col-md-6">
+                                            {{ form.photo }}
+                                            {{ form.photo.errors }}
+                                        </div>
+                                        <div class="col-md-6">
+                                             <button id="add_tweet" class="btn btn-primary">Add Comment</button>
+                                        </div>
+                                     </div> 
+                                  </div>
+                           </form>
                     </div>
                     <div class="col-md-8">
                         <h4>Total
@@ -45,9 +53,10 @@
                             {% for tweet in tweets %}
                             <li class="tweet">
                                 {% if tweet.photo %}
-                                    <img src="{{ tweet.photo.url }}" class="img-circle circle-border" width=50 height=50/>  
+                                <a href="{{ tweet.photo.url }}">
+                                    <img src="{{ tweet.photo.url }}" class="img-thumbnail thumbnail-border" width=50 height=40/></a>  
                                 {% endif %}                   
-                                <p>{{ tweet.comment|capfirst }}</p>
+                                <p>{{ tweet.comment|safe }}</p>
                                 <span>Created on {{ tweet.created_on }}</span>
                             </li>
                             {% endfor %}
@@ -73,7 +82,7 @@
                             {% if tweet.photo %}
                                 <img src="{{ tweet.photo.url }}" class="img-circle circle-border" width=50 height=50/>  
                             {% endif %} 
-                            <p>{{ tweet_history.comment|capfirst }}</p>
+                            <p>{{ tweet_history.comment|safe }}</p>
                             <i>{{ tweet_history.created_on }}</i>
                         </li>
                         {% endfor %}
@@ -114,7 +123,7 @@
                 <a href="http://www.catalpa.io" target="blank">Catalpa International Ltd</a>
             </p>
             <p>
-                Copyright &copy; <a href="https://github.com/catalpainternational/">Catalpa International</a> 2016
+                Copyright &copy; <a href="https://github.com/catalpainternational" target="blank">Catalpa International</a> 2016
             </p>
         </footer>
 
