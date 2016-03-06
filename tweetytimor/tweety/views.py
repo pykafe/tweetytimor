@@ -1,10 +1,11 @@
 from django.views.generic.edit import CreateView, ModelFormMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from tweety.models import TweetyTimor, TweetyLike, TweetyUser
-from .forms import LikeForm
+from .forms import LikeForm, RegisterUser
 from django.core.urlresolvers import reverse_lazy
-from tinymce.widgets import TinyMCE
-from django import forms
+#from tinymce.widgets import TinyMCE
+#from django import forms
+from django_markdown.widgets import MarkdownWidget
 
 
 class Index(CreateView):
@@ -22,9 +23,14 @@ class Index(CreateView):
         context['like_form'] = LikeForm()
         return context
 
+   # def get_form(self):
+    #    form = super(Index, self).get_form()
+     #   form.fields['comment'].widget =TinyMCE()
+      #  return form
+
     def get_form(self):
         form = super(Index, self).get_form()
-        form.fields['comment'].widget =TinyMCE()
+        form.fields['comment'].widget = MarkdownWidget(attrs={'cols': 20, 'rows': 20})
         return form
 
 
@@ -36,8 +42,7 @@ class Like(CreateView):
 
 
 class CreateTweetyUser(SuccessMessageMixin, CreateView):
-    model = TweetyUser
-    fields = ['first_name', 'last_name', 'username', 'password', 'email', 'confirm_email']
+    form_class = RegisterUser
     template_name = "tweety/create.html"
     success_url = reverse_lazy('index')
     success_message = "welcome to your comment"
@@ -53,7 +58,7 @@ class CreateTweetyUser(SuccessMessageMixin, CreateView):
         context['total_users'] = TweetyUser.objects.count()
         return context
 
-    def get_form(self):
-        form = super(CreateTweetyUser, self).get_form()
-        form.fields['password'].widget = forms.PasswordInput()
-        return form
+    #def get_form(self):
+     #   form = super(CreateTweetyUser, self).get_form()
+      #  form.fields['password'].widget = forms.PasswordInput()
+       # return form

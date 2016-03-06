@@ -8,6 +8,7 @@
         <script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js'%}"></script>
 	    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
         {{ form.media }}
+        {{ form.email }}
     
         <title>Tweety - Timor</title>
 
@@ -115,7 +116,7 @@
                                      <p>
                                      <img src="{{ MEDIA_URL }}{{ tweet.photo}}" class="img-circle circle-border" width=60  height=60 />
                                     {% endif %}
-                                    {{ tweet.comment|safe }}
+                                    {{ tweet.comment|safe|escape }}
                                      </p>
                                     {% if tweet.nation %}
                                      <p><i>It's tweety from {{tweet.nation|capfirst}} and Created on {{ tweet.created_on}}</i></p>

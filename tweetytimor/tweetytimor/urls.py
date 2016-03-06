@@ -20,7 +20,10 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^', include('tweety.urls')),
     url(r'^accounts/', include('django.contrib.auth.urls')),
-    url(r'^tinymce/', include('tinymce.urls')),
+#    url(r'^tinymce/', include('tinymce.urls')),
+]
+urlpatterns += [
+    url('^markdown/', include( 'django_markdown.urls')),
 ]
 
 # only when we are running in debug made - serve media files locally
