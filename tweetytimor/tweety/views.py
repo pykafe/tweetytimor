@@ -1,4 +1,4 @@
-from django.views.generic.edit import CreateView, ModelFormMixin
+from django.views.generic.edit import CreateView, ModelFormMixin, UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
 from tweety.models import TweetyTimor, TweetyLike, TweetyUser
 from .forms import LikeForm, RegisterUser
@@ -62,3 +62,15 @@ class CreateTweetyUser(SuccessMessageMixin, CreateView):
      #   form = super(CreateTweetyUser, self).get_form()
       #  form.fields['password'].widget = forms.PasswordInput()
        # return form
+
+
+class UpdateTweety(UpdateView):
+    model = TweetyTimor
+    fields = ['comment', 'nation', 'photo']
+    template_name = "tweety/index.html"
+    success_url = reverse_lazy('index')
+
+    def get_form(self):
+        form = super(UpdateTweety, self).get_form()
+        form.fields['comment'].widget = MarkdownWidget(attrs={'cols': 20, 'rows': 20})
+        return form
