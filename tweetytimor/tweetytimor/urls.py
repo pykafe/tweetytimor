@@ -16,8 +16,13 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from tweety.views import Index
+from tweety.views import Like
+from tweety.views import TweetyComment
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', Index.as_view(), name='index'),
+    url(r'^$', Like.as_view(), name='like'),
+    url(r'^$', TweetyComment.as_view(), name='tweetycomment'),
 ]

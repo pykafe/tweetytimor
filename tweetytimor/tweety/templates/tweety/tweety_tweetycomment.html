@@ -1,0 +1,10 @@
+<form action="." method="post">
+    {% csrf_token %}
+    <p>Add your {{ form.tweety.label_tag }}</p>
+    <p>Add your {{ form.tweetycomment.label_tag }}</p>
+    <p> {{ form.tweety}}</p>
+    <p> {{ form.tweetycomment}}</p>
+
+    <div id="textarea_feedback"></div>
+    <input type="submit" value="Add" />
+</form>
