@@ -1,8 +1,22 @@
 {% load el_pagination_tags %}
 
-{% lazy_paginate 5 tweets %}
-{% for tweet in tweets %}
-<li>{{ tweet.comment }}</li>
-{% endfor %}
+    {% lazy_paginate 5 tweets %}
+    {% for tweet in tweets %}
+    <li>
+        {{ tweet.comment }} 
+        <button class="comment_tweet" data-tweet="{{ tweetcomment.pk}}">Comment</button>
+        <button class="like_tweet" data-tweet="{{ tweet.pk}}">Like</button>
+        <span id="like_count_{{ tweet.pk }}">
 
+        <!-- Atu konta totalidade ba tweety like -->
+        {% if tweet.like_count = 0 %}
+            {{ tweet.like_count }} likes
+        {% elif tweet.like_count = 1 %}
+            {{ tweet.like_count }} like
+        {% else %}
+            {{ tweet.like_count }} likes
+        {% endif %}
+    </span>
+    </li>
+        {% endfor %}
 {% show_more %}
