@@ -1,6 +1,8 @@
 {% load i18n %}
 {% load static %}
 {% load django_markdown %}
+{% load el_pagination_tags %}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -113,6 +115,7 @@
                                             {% else %} Tweets {% endif %}
                                                 :
                                         </h3>
+                                    {% paginate 5 tweets %}
                                     {% for tweet in tweets %}
                                         {% if tweet.photo %}
                                          <p>
@@ -127,6 +130,7 @@
                                         {% endif %}
                                              <a href="{% url 'edit' tweet.id %}" class="btn btn-default">Edit</a><br>
                                     {% endfor %}
+                                    {% show_pages %}
                                 </div>
                             </div>
                         </div>
@@ -137,6 +141,7 @@
                              <button id="toggle_comment" class="btn btn-default">Add your comment</button>
                              <h3> All History</h3>
                              <ul>
+                             {% paginate 5 tweets_histories %}
                              {% for tweet_history in tweets_histories %}
                                  <li>
                                     <p>{{ tweet_history.comment|markdown }}</p>
@@ -149,6 +154,7 @@
                                     </span>
                                  </li>
                              {% endfor %}
+                             {% show_pages %}
                              </ul>
                         </div>
                     </div>
@@ -175,6 +181,7 @@
                                 {% else %} Tweets {% endif %}
                                             :
                             </h3>
+                            {% paginate 5 tweets %}
                             {% for tweet in tweets %}
                                 <p>
                                 {% if tweet.photo %}
@@ -188,6 +195,7 @@
                                     <p><i>Created on {{tweet.created_on}}</i></p>
                                 {% endif %}
                             {% endfor %}
+                            {% show_pages %}
                         </div>
                     </div>
                 </div>
@@ -196,6 +204,7 @@
                              <button id="toggle_comment" class="btn btn-default">Show all comment</button>
                              <h3> All History</h3>
                              <ul>
+                             {% paginate 5 tweets_histories %}
                              {% for tweet_history in tweets_histories %}
                                  <li>
                                     <p>{{ tweet_history.comment|markdown }}</p>
@@ -208,6 +217,7 @@
                                     </span>
                                  </li>
                              {% endfor %}
+                             {% show_pages %}
                              </ul>
                         </div>
                     </div>
