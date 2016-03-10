@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     #'tinymce',
     'django_markdown',
+    'registration',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -118,6 +119,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR + '/media/'
 
 LOGIN_REDIRECT_URL = '/'
+
+ACCOUNT_ACTIVATION_DAYS = 7
 
 MARKDOWN_EDITOR_SKIN = 'simple'
 MARKDOWN_EXTENSIONS = ['extra']

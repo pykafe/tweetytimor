@@ -19,7 +19,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^', include('tweety.urls')),
-    url(r'^accounts/', include('django.contrib.auth.urls')),
+   # url(r'^accounts/', include('django.contrib.auth.urls')),
+    url(r'^accounts/', include('registration.backends.hmac.urls'))
 #    url(r'^tinymce/', include('tinymce.urls')),
 ]
 urlpatterns += [

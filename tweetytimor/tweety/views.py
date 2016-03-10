@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse_lazy
 #from tinymce.widgets import TinyMCE
 #from django import forms
 from django_markdown.widgets import MarkdownWidget
+from django.db.models import Count
 
 
 class Index(CreateView):
@@ -16,7 +17,7 @@ class Index(CreateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(Index, self).get_context_data(*args, **kwargs)
-        context['tweets'] = TweetyTimor.objects.order_by('-created_on')[:5]
+        context['tweets'] = TweetyTimor.objects.all().annotate(like_count=Count('comment'))
         context['tweets_histories'] = TweetyTimor.objects.order_by('-created_on')
         context['total_tweets'] = TweetyTimor.objects.count()
         context['like_tweets'] = TweetyLike.objects.count()

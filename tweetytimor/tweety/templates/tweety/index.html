@@ -1,5 +1,6 @@
 {% load i18n %}
 {% load static %}
+{% load django_markdown %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -31,10 +32,10 @@
                         <span class="badge">
                             {{user|capfirst}}
                         </span>
-                         <a href="{% url 'logout' %}">Logout</a>
+                         <a href="{% url 'auth_logout' %}">Logout</a>
                     {% else %}
                         <a href="{% url 'create' %}">Create</a>
-                        <a href="{% url 'login' %}">Login</a>
+                        <a href="{% url 'auth_login' %}">Login</a>
                     {% endif %}
 
                     <p class="badge">
@@ -117,7 +118,7 @@
                                          <p>
                                          <img src="{{ MEDIA_URL }}{{ tweet.photo}}" class="img-circle circle-border" width=60  height=60 />
                                         {% endif %}
-                                        {{ tweet.comment|safe }}
+                                        {{ tweet.comment|markdown }}
                                          </p>
                                         {% if tweet.nation %}
                                          <p><i>It's tweety from {{tweet.nation|capfirst}} and Created on {{ tweet.created_on}}</i></p>
@@ -138,7 +139,7 @@
                              <ul>
                              {% for tweet_history in tweets_histories %}
                                  <li>
-                                    <p>{{ tweet_history.comment|safe }}</p>
+                                    <p>{{ tweet_history.comment|markdown }}</p>
                                     <span class="badge">
                                         {% if tweet_history.nation %}
                                          <i>It's tweety from {{tweet_history.nation|capfirst}} and Created on {{ tweet_history.created_on }}</i>
@@ -179,9 +180,9 @@
                                 {% if tweet.photo %}
                                     <img src="{{ MEDIA_URL }}{{ tweet.photo }}" class="img-circle circle-border" width=60  height=60 />
                                 {% endif %}
-                                {{ tweet.comment|safe }}
-                                </p>
-                                {% if tweet.nation %}}
+                                {{ tweet.comment|markdown }}
+
+                                {% if tweet.nation %}
                                     <p><i>It's tweety from {{tweet.nation|capfirst}} and Created on {{ tweet.created_on}}</i></p>
                                 {% else %}
                                     <p><i>Created on {{tweet.created_on}}</i></p>
@@ -197,7 +198,7 @@
                              <ul>
                              {% for tweet_history in tweets_histories %}
                                  <li>
-                                    <p>{{ tweet_history.comment|safe }}</p>
+                                    <p>{{ tweet_history.comment|markdown }}</p>
                                     <span class="badge">
                                         {% if tweet_history.nation %}
                                             <i>It's tweety from {{tweet_history.nation|capfirst}} and Created on {{ tweet_history.created_on }}</i>
