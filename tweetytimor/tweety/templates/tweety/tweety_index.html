@@ -2,20 +2,34 @@
 {% load static %}
 <html>
     <head>
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/tweety.css' %}" />
         <script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
     </head>
     <body>
-        <h1>Hello Tweety Timor</h1>
-        <p>say something...</p>
+        <nav class="navbar navbar-default"
+            <div class="container-fluid">
+                <h2>Hello Tweety Timor</h2>
+            </div>
+        </nav>
 
-        <form action="." method="post">
-            {% csrf_token %}
-            <p>Add your {{ form.comment.label_tag }}</p>
-            <p> {{ form.comment}}</p>
+    <div class = "container-fluid">
+        <div id="tweetdisplay">
+            <div class="rwo">
+                <form action="." method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <p>Add your {{ form.comment.label_tag }}</p>
+                    <p> {{ form.comment}}</p>
+                    <div class="col-md-6">
+                        <div id="textarea_feedback"></div>
+                         <button id="add_tweet" class="btn btn-primary">Add</button>
+                    </div>
 
-            <div id="textarea_feedback"></div>
-            <input type="submit" value="Add" />
-        </form>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
         <!-- Atu halo konta ba karakter no fo limitasaun ba karakter -->
         <script type="text/javascript">
@@ -32,15 +46,22 @@
             });
         </script>
 
-
+        <div id="history" class = "row">
+            <div class="col-md-12">
+               <h4>Total
+                   <span class="badge">
         <!-- Atu konta totalidade ba tweety comments -->
-        {% if total_tweets == 0 %}
-            <p>there are {{ total_tweets }} tweets</p>
-        {% elif total_tweets == 1 %}
-            <p>there is {{ total_tweets }} tweet</p>
-        {% else %}
-            <p>there are {{ total_tweets }} tweets</p>
-        {% endif %}
+                        {% if total_tweets == 0 %}
+                    </span>
+                        <p>there are {{ total_tweets }} tweets</p>
+                        {% elif total_tweets == 1 %}
+                            <p>there is {{ total_tweets }} tweet</p>
+                        {% else %}
+                            <p>there are {{ total_tweets }} tweets</p>
+                        {% endif %}
+                </h4>
+            </div>
+        </div>
 
         <!-- Atu halo iterasaun ba tweety comments -->
         <ul>

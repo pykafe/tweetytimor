@@ -2,7 +2,6 @@
 
 {% lazy_paginate 5 tweets %}
     {% for tweet in tweets %}
-        <li>{{ tweet.name }}</li>
         <li>{{ tweet.comment }}</li>
         <li>{{ tweet.created_on }}</li>
     {% endfor %}

@@ -1,0 +1,85 @@
+/* html style 
+-----------------------------------------------------------------*/
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body{
+    font-family:"Gill Sans Extrabold", Helvetica, sans-serif;
+	background-color:silver;
+	margin-bottom: 150px;
+}
+
+button#add_tweet, .badge, .navbar {
+    background-color: teal;
+}
+
+button#toggle_history {
+    background-color: teal;
+    position: relative;
+    left: 975px;
+}
+
+.navbar {
+    color: White;
+}
+
+form {
+    text-align: center;
+}
+
+li.tweet {
+    background-color: white;
+    margin-bottom: 3px;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+li.tweet p {
+   margin-bottom: 2px; 
+}
+
+li.tweet span {
+    font-size: smaller;
+    font-style: italic;
+}
+
+li.tweets-history {
+    background-color: #77BFC7;
+    
+    padding: 5px;
+}
+
+.row{
+    margin:10px;
+    padding:10px;
+}
+
+/* styling  page footer 
+-----------------------------------------------------------------*/
+#pagefooter{
+    font-size:20px;
+}
+
+footer {
+    background-color: teal;
+    text-align:center;
+    margin-top: 10px;
+    padding: 40px;
+    color: #ffffff;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 150px;
+}
+
+footer a {
+    color: #ffffff;
+}
+
+footer a:hover {
+    color: #87CBF5;
+    text-decoration: none;
+}
