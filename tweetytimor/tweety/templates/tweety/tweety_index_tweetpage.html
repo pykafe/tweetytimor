@@ -1,9 +1,16 @@
 {% load el_pagination_tags %}
 
 {% lazy_paginate 5 tweets %}
-    {% for tweet in tweets %}
-        <li>{{ tweet.comment }}</li>
-        <li>{{ tweet.created_on }}</li>
-    {% endfor %}
+{% for tweet in tweets %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h3>{{ tweet.comment }}</h3>
+            <p>{{ tweet.created_on }}</p>
+        </div>
+        <div class="panel-footer">
+            <a href="tweety_comment/{{ tweet.id }}/">Comments</a>
+        </div>
+    </div>
+{% endfor %}
 
 {% show_more %}

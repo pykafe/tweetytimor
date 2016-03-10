@@ -3,7 +3,7 @@
 {% lazy_paginate 5 tweets %}
     {% for tweet in tweets %}
         <li>{{ tweet.tweety }}</li>
-            <li>{{ tweet.tweetycomment }}</li>
+        <li>{{ tweet.tweetycomment }}</li>
     {% endfor %}
 
 {% show_more %}
