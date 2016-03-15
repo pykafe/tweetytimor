@@ -1,10 +1,24 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h3>{{ tweet.comment }}</h3>
+        <p>{{ tweet.created_on }}</p>
+    </div>
+</div>
+
+<ul>
+{% for commment in comments %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h3>{{ commment.tweetycomment }}</h3>
+        </div>
+    </div>
+{% endfor %}
+</ul>
+
 <form action="." method="post">
     {% csrf_token %}
-    <p>Add your {{ form.tweety.label_tag }}</p>
     <p>Add your {{ form.tweetycomment.label_tag }}</p>
-    <p> {{ form.tweety}}</p>
-    <p> {{ form.tweetycomment}}</p>
-
-    <div id="textarea_feedback"></div>
+    {{ form.as_p }}
+    <input type="hidden" id="id_tweet" name="tweet" value="1">
     <input type="submit" value="Add" />
 </form>

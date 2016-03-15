@@ -12,7 +12,8 @@ body{
 }
 
 button#add_tweet, .badge, .navbar {
-    background-color:333300 ;
+    font-family:"Gill Sans Extrabold", Helvetica, sans-serif;
+    background-color:5cb85c;
 }
 
 button#toggle_history {
@@ -58,8 +59,8 @@ li.tweets-history {
 
 /* styling  page footer
 -----------------------------------------------------------------*/
-#pagefooter{
-    font-size:20px;
+pagefooter{
+    font-size:40px;
 }
 
 footer {

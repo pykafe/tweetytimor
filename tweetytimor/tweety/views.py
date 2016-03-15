@@ -1,10 +1,11 @@
 from django.views.generic.edit import CreateView
-from tweety.models import TweetyTimor, Like, TweetyComment
+from tweety import models
+from tweety.forms import TweetyCommentForm
 from django.core.urlresolvers import reverse_lazy
 
 
 class Index(CreateView):
-    model = TweetyTimor
+    model = models.TweetyTimor
     fields = ['comment']
     template_name = 'tweety/tweety_index.html'
     page_template_name = 'tweety/tweety_index_tweetpage.html'
@@ -17,14 +18,14 @@ class Index(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(Index, self).get_context_data(**kwargs)
-        context['tweets'] = TweetyTimor.objects.order_by('-created_on')[:5]
-        context['total_tweets'] = TweetyTimor.objects.count()
+        context['tweets'] = models.TweetyTimor.objects.order_by('-created_on')[:5]
+        context['total_tweets'] = models.TweetyTimor.objects.count()
         context['page_template'] = self.page_template_name
         return context
 
 
 class Like(CreateView):
-    model = Like
+    model = models.Like
     fields = ['tweety']
     template_name = 'tweety/tweety_like.html'
     page_template_name = 'tweety/tweety_like_tweetpage.html'
@@ -32,18 +33,21 @@ class Like(CreateView):
 
 
 class TweetyComment(CreateView):
-    model = TweetyComment
-    fields = ['tweety', 'tweetycomment']
+    model = models.TweetyComment
+    fields = ['tweet', 'tweetycomment']
     template_name = 'tweety/tweety_tweetycomment.html'
     page_template_name = 'tweety/tweety_tweetycomment_tweetpage.html'
-    success_url = reverse_lazy('tweetycomment')
+    success_url = reverse_lazy('index')
+    #form_class = TweetyCommentForm
 
     def get_template_names(self):
         if self.request.is_ajax():
             return [self.page_template_name]
-        return super(CreateView, self).get_template_names()
+        return super(TweetyComment, self).get_template_names()
 
     def get_context_data(self, **kwargs):
-        context = super(Index, self).get_context_data(**kwargs)
+        context = super(TweetyComment, self).get_context_data(**kwargs)
         context['page_template'] = self.page_template_name
+        context['tweet'] = models.TweetyTimor.objects.get(id=self.kwargs.get('tweet'))
+        context['comments'] = models.TweetyComment.objects.filter(tweet=self.kwargs.get('tweet'))
         return context

@@ -1,10 +1,11 @@
 {% load el_pagination_tags %}
 
 {% lazy_paginate 5 tweets %}
+<<<<<<< HEAD
     {% for tweet in tweets %}
         <div class="panel panel-default">
             <div class="panel-body">
-                <h2>{{ tweet.comment }}</h2>
+                <h3>{{ tweet.comment }}</h3>
                 <p>{{ tweet.created_on }}</p>
             </div>
                 <div class="panel-footer">
@@ -12,5 +13,18 @@
                 </div>
         </div>
     {% endfor %}
+=======
+{% for tweet in tweets %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h3>{{ tweet.comment }}</h3>
+            <p>{{ tweet.created_on }}</p>
+        </div>
+        <div class="panel-footer">
+            <a href="tweety_comment/{{ tweet.id }}/">Comments</a>
+        </div>
+    </div>
+{% endfor %}
+>>>>>>> 9af47a0f37c248c68117c5fb9eb5cb56786b8ad1
 
 {% show_more %}
