@@ -20,4 +20,4 @@ class TweetyComment(models.Model):
     tweetycomment = models.TextField(max_length=225)
 
     def __unicode__(self):
-        return self.comment
+        return self.tweetycomment
