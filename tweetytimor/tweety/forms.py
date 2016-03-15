@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import TweetyLike, TweetyUser
+from .models import TweetyLike, TweetyUser, PersonTweety
 from django.core.exceptions import ValidationError
 from django import forms
 
@@ -8,6 +8,12 @@ class LikeForm(ModelForm):
     class Meta:
         model = TweetyLike
         fields = ['like']
+
+
+class PersonForm(ModelForm):
+    class Meta:
+        model = PersonTweety
+        fields = ['picture']
 
 
 class RegisterUser(ModelForm):

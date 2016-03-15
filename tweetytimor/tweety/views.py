@@ -1,7 +1,7 @@
 from django.views.generic.edit import CreateView, ModelFormMixin, UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
 from tweety.models import TweetyTimor, TweetyLike, TweetyUser
-from .forms import LikeForm, RegisterUser
+from .forms import LikeForm, RegisterUser, PersonForm
 from django.core.urlresolvers import reverse_lazy
 #from tinymce.widgets import TinyMCE
 #from django import forms
@@ -38,6 +38,13 @@ class Like(CreateView):
     model = TweetyLike
     fields = ['like']
     template_name = "tweety/like.html"
+    success_url = reverse_lazy('index')
+
+
+
+class Person(CreateView):
+    form_class = PersonForm
+    template_name = "tweety/picture.html"
     success_url = reverse_lazy('index')
 
 

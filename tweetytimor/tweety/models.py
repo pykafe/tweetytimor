@@ -2,6 +2,11 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from webcam.fields import CameraField
+
+
+class PersonTweety(models.Model):
+    picture = CameraField()
 
 
 class TweetyTimor(models.Model):

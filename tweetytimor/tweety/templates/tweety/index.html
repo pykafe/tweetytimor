@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="{% static 'css/tweety.css' %}" />
         <script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js'%}"></script>
 	    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="{{ STATIC_URL }}el-pagination/js/el-pagination.js"></script>
         {{ form.media }}
         {{ form.email }}
     
@@ -115,7 +116,6 @@
                                             {% else %} Tweets {% endif %}
                                                 :
                                         </h3>
-                                    {% paginate 5 tweets %}
                                     {% for tweet in tweets %}
                                         {% if tweet.photo %}
                                          <p>
@@ -130,7 +130,6 @@
                                         {% endif %}
                                              <a href="{% url 'edit' tweet.id %}" class="btn btn-default">Edit</a><br>
                                     {% endfor %}
-                                    {% show_pages %}
                                 </div>
                             </div>
                         </div>
@@ -141,7 +140,6 @@
                              <button id="toggle_comment" class="btn btn-default">Add your comment</button>
                              <h3> All History</h3>
                              <ul>
-                             {% paginate 5 tweets_histories %}
                              {% for tweet_history in tweets_histories %}
                                  <li>
                                     <p>{{ tweet_history.comment|markdown }}</p>
@@ -154,7 +152,6 @@
                                     </span>
                                  </li>
                              {% endfor %}
-                             {% show_pages %}
                              </ul>
                         </div>
                     </div>
@@ -262,6 +259,7 @@
                 });
             });
         </script>
+        <script>$.endlessPaginate();</script>
 
         <footer class="footer">
              Copyright &copy; <a href="https://github.com/catalpainternational/">Catalpa International</a> 2016

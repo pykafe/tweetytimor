@@ -1,0 +1,58 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/tweety.css' %}" />
+        <script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js'%}"></script>
+	    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    
+        <title>Tweety - Timor</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <h2>Hello Tweety Timor</h2>
+                <span class="badge">
+                    <a href="{% url 'index' %}" class="btn btn-primary">Back</a>
+                </span>
+            </div>
+        </nav>
+            <div class ="container">
+                <div class="panel-body">
+                    <div class="nav nav-pills">
+                        <div class = "row" id="body_box">
+                            <div class = "col-md-12">
+                                <form action"." method="post">
+                                    {% csrf_token %}
+                                    <p>{{ form.as_p }}</p>
+                                    <button type="submit" class="btn btn-primary">Create New User</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </body>
+</html>
+
+{% load i18n static %}
+<input type="hidden" name="{{ name }}" id="{{ attrs.id }}" value="{{ picture.name }}"/>
+<input type="hidden" name="data_{{ name }}" id="data_{{ attrs.id }}" value="{{ picture.stream}}"/>
+<img class="camera-preview" id="{{ attrs.id }}-image" width="{{ width }}" height="{{ height }}"/>
+<script type="text/javascript">
+    $(window).load(function () {
+                var previous_data = $("#data_{{ attrs.id }}").attr('value');
+                        if (previous_data != "") {
+                                        $("#{{ attrs.id }}-image").attr('src', 'data:image/jpeg;base64,' + previous_data);
+                                                }
+                            });
+    $(window).load(function () {
+                SingleMonitor({swffile:"{% static 'webcam/jscam.swf' %}"});
+                    })
+</script>
+<br/>
+{{ attrs.file }}
+<input type="button" class="btn" value='{% trans 'Take a picture' %}'
+                            onclick="window.cameramonitor.show_monitor('{{ format }}', $('#data_{{ attrs.id }}'), $('#{{ attrs.id }}-image'))"/>

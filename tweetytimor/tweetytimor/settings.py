@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = (
     'tweety',
     'django_behave',
+    'webcam',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -84,12 +85,23 @@ WSGI_APPLICATION = 'tweetytimor.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
+#DATABASES = {
+ #   'default': {
+  #      'ENGINE': 'django.db.backends.sqlite3',
+   #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    #}
+#}
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'bank',
+            'USER': 'root',
+            'PASSWORD': 'anau',
+            'HOST': 'localhost',
+            'POST': '3306',
+            }
+        }
 
 
 # Internationalization
