@@ -37,8 +37,10 @@ class TweetyComment(CreateView):
     fields = ['tweet', 'tweetycomment']
     template_name = 'tweety/tweety_tweetycomment.html'
     page_template_name = 'tweety/tweety_tweetycomment_tweetpage.html'
-    success_url = reverse_lazy('index')
-    #form_class = TweetyCommentForm
+
+    def get_success_url(self,):
+        kwargs = {'tweet': self.kwargs['tweet']}
+        return reverse_lazy('tweety_comment', kwargs=kwargs)
 
     def get_template_names(self):
         if self.request.is_ajax():
