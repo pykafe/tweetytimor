@@ -1,5 +1,5 @@
 from django.views.generic import TemplateView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from tweety.models import TweetyTimor
 from django.core.urlresolvers import reverse_lazy
 from tinymce.widgets import TinyMCE
@@ -13,7 +13,7 @@ class CSSTest(TemplateView):
 class Index(CreateView):
     model = TweetyTimor
     fields = ['comment', 'photo']
-    template_name = "tweety/index.html"
+    template_name = "tweety/tweety_comment.html"
     success_url = reverse_lazy('index')
 
     def get_context_data(self, *args, **kwargs):
@@ -27,3 +27,20 @@ class Index(CreateView):
         form = super(Index, self).get_form(form_class)
         form.fields['comment'].widget = TinyMCE()
         return form
+        
+        
+class TweetyDelete(DeleteView):
+    model = TweetyTimor
+    template_name = 'tweety/tweety_delete.html'
+    success_url = reverse_lazy('index')
+
+    def delete(self, request, *args, **kwargs):
+        return super(TweetyDelete, self).delete(request, *args, **kwargs)
+        
+        
+class TweetyUpdate(UpdateView):
+    model = TweetyTimor
+    fields = ['comment', 'photo']
+    template_name = "tweety/tweety_update.html"
+    success_url = reverse_lazy('index')
+

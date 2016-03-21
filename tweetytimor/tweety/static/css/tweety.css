@@ -25,9 +25,6 @@ button#toggle_history {
     color: White;
 }
 
-form {
-    text-align: right;
-}
 
 li.tweet {
     background-color: white;
@@ -56,7 +53,43 @@ li.tweets-history {
     padding:10px;
 }
 
-/* styling  page footer 
+/* Styling registration pages 
+------------------------------------------------------------------*/
+.login_box {
+    background: Teal;
+    border: 1px solid #D4DFE7;
+    box-shadow: 5px 5px 5px 0px White;
+    padding: 10px 14px 14px;
+    margin-top: 10px;
+    margin-bottom: 20;
+}
+
+div {
+    display: block;
+}
+#center_content {
+    text-align:center;
+
+}
+
+#center_content img {
+    height:150px;
+    padding:20px;
+}
+a {
+    background-color: transparent;
+}
+
+form {
+    display: block;
+    margin-top: 0em;
+}
+
+#center-form-reset-passworld {
+    text-align: center;
+}
+
+/* styling  footer page
 -----------------------------------------------------------------*/
 #pagefooter{
     font-size:20px;

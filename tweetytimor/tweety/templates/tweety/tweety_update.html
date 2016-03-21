@@ -1,0 +1,44 @@
+{% extends 'tweety/base.html' %}
+{% load i18n %}
+
+{% block title %}
+    Tweety Update
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h4>Update Your Comment:</h4>
+        </div>
+    </div>
+        <div class="row">
+            <div class="col-md-4">
+                
+                   <form action="." method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.comment }}
+                        {{ form.comment.errors }} 
+                         <div class ="container-fluid">
+                             <div class="row">
+                                <div class="col-md-6">
+                                    {{ form.photo }}
+                                    {{ form.photo.errors }}
+                                </div>
+                                <div class="col-md-6">
+                                     <button id="add_tweet" class="btn btn-primary">Update comment</button>
+                                </div>
+                             </div> 
+                          </div>
+                   </form>
+            </div>
+                    
+            <div class="col-md-8">
+                {% if object.photo %}
+                    <img src="{{ object.photo.url}}" class="img-thumbnail thumbnail-border" width=310 height=180/>
+                {% endif %}
+                <p class="person-name">{{ user.comment }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

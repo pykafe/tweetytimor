@@ -1,0 +1,105 @@
+{% extends 'tweety/base.html' %}
+
+{% block title %}
+    Add comment
+{% endblock %}
+
+{% block content %} 
+    <div class ="container-fluid">
+            <div id="tweetdisplay" >
+                <div class="row">
+                    <div class="col-md-4">
+                        <h4>Say Something :</h4>
+                            <div class="col-md-12">   
+                                <form action="." method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    {{ form.comment }}
+                                    {{ form.comment.errors }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form.photo }}
+                                        {{ form.photo.errors }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button id="add_tweet" class="btn btn-primary">Add Comment</button>
+                                    </div>               
+                                 </form>
+                            </div>
+                            <div class="col-md-8">
+                                <h4>Total
+                                    <span class="badge">
+                                        {{ total_tweets }}
+                                    </span>
+                                    {% if total_tweets == 1 %} 
+                                            Tweets
+                                    {%elif total_tweets == 0 %} 
+                                            no comment 
+                                    {% else %} Tweets {% endif %}
+                                </h4>
+                                <ul>
+                                    <blockquote>
+                                        {% for tweet in tweets %}
+                                            <li class="tweet">
+                                                {% if tweet.photo %}
+                                                    <a href="{{ tweet.photo.url }}">
+                                                    <img src="{{ tweet.photo.url }}" class="img-thumbnail thumbnail-border" width=50 height=40/></a>  
+                                                {% endif %}                   
+                                                    <p>{{ tweet.comment|safe }}</p>
+                                                <span>Created on {{ tweet.created_on }}</span>  
+                                            </li>
+                                                <a href="{% url 'tweety_update' tweet.pk %}" class="btn btn-primary">Update</a>
+                                                <a href="{% url 'tweety_delete' tweet.pk %}" class="btn btn-danger">Delete</a>
+                                        {% endfor %}
+                                    </blockquote>
+                                </ul>
+                            </div>
+                    </div>
+            </div>
+            <div id="history" class = "row">
+                <div class="col-md-12">
+                    <h4>Total
+                        <span class="badge">
+                            {{ total_tweets }}
+                        </span>
+                        {% if total_tweets == 1 %} 
+                            Tweets
+                        {%elif total_tweets == 0 %} 
+                            no comment 
+                        {% else %} Tweets {% endif %}
+                    </h4>
+                <ul>
+                    {% for tweet_history in tweets_histories %}
+                        <li class="tweet">
+                            {% if tweet.photo %}
+                                <img src="{{ tweet.photo.url }}" class="img-circle circle-border" width=50 height=50/>  
+                            {% endif %} 
+                            <p>{{ tweet_history.comment|safe }}</p>
+                            <i>{{ tweet_history.created_on }}</i>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>  
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12" id="history_button_column" >
+                <button id="toggle_history" class="btn btn-primary">Show all History</button>
+            </div>
+        </div>
+    </div>
+         
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#history').hide();
+            $( "#toggle_history" ).click(function() {
+                $( "#history" ).slideToggle( "fast" );
+                $( "#tweetdisplay" ).slideToggle( "fast" );
+            });
+
+            $('#add_tweet').click(function(){
+                //submit the form
+                $('form').submit();
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'registration/base.html' %}
+{% load i18n %}
+
+
+    {% block title %}
+    {% trans 'Tweety Login' %}
+    {% endblock %}
+
+    {% block content %}
+    
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}" />
+            
+            {% if form.errors %}
+                <p>{% trans "Your username and password didn't match, Please try again" %}.</p>
+            {% endif %}
+
+                <div class="container_fluid">
+                    <div class="login_box">
+                        <div class="row">
+                            <div class="col-md-4">{% trans 'Username' %}</div>
+                            <div class="col-md-8">
+                                {{ form.username }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">{% trans 'Password' %}</div>
+                            <div class="col-md-8">
+                                {{ form.password }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button id="login_button" class="btn btn-primary">{% trans 'Login' %}</button><br><br>
+                                <a href="{% url 'password_reset' %}">{% trans 'Reset Password' %}?</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+         </form>
+    {% endblock %}
