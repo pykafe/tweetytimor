@@ -2,11 +2,18 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from webcam.fields import CameraField
+
+import webcam
+import tempfile
+
+from webcam.fields import DBCameraField, FSCameraField
+from webcam.storage import CameraFileSystemStorage
 
 
 class PersonTweety(models.Model):
-    picture = CameraField()
+    picture1 = DBCameraField() # store in the database
+   # picture2 = FSCameraField(format='gif', max_length=100) # by default storen on settings.MEDIA_ROOT
+    #picture3 = FSCameraField(format='png', storage=CameraFileSystemStorage('/absolute/path/to/'), null=True, blank=True) # store on filesystem
 
 
 class TweetyTimor(models.Model):

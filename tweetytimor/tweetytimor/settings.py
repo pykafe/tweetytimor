@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = (
     'tweety',
     'django_behave',
+    'django_cleanup',
     'webcam',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -80,6 +81,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'tweetytimor.wsgi.application'
+
 
 
 # Database

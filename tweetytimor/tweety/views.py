@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse_lazy
 #from tinymce.widgets import TinyMCE
 #from django import forms
 from django_markdown.widgets import MarkdownWidget
+from django.forms.widgets import Widget
 
 
 class Index(CreateView):
@@ -44,7 +45,7 @@ class Like(CreateView):
 
 class Person(CreateView):
     form_class = PersonForm
-    template_name = "tweety/picture.html"
+    template_name = "webcam/templates/webcam/dbwidget.html"
     success_url = reverse_lazy('index')
 
 
