@@ -25,6 +25,7 @@
                         </span>
                          <a href="{% url 'auth_logout' %}">Logout</a>
                     {% else %}
+                        <a href="{% url 'persontweety' %}">Webcam</a>
                         <a href="{% url 'create' %}">Create</a>
                         <a href="{% url 'auth_login' %}">Login</a>
                     {% endif %}
