@@ -7,6 +7,7 @@
 {% endblock %}
 
 {% block content %}
+
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                     <h2>Hello Tweety Timor</h2>
@@ -167,7 +168,7 @@
                                 {% else %} Tweets {% endif %}
                                             :
                             </h3>
-                            {% paginate 5 tweets %}
+                            {% paginate 2 tweets %}
                             {% for tweet in tweets %}
                                 <p>
                                 {% if tweet.photo %}

@@ -5,13 +5,19 @@ from django.contrib.auth.models import AbstractUser
 
 import webcam
 import tempfile
+import webcam.admin
 
-from webcam.fields import DBCameraField, FSCameraField
-from webcam.storage import CameraFileSystemStorage
+#from webcam.fields import DBCameraField, FSCameraField
+#from webcam.storage import CameraFileSystemStorage
+from webcam.fields import CameraField
 
 
 class PersonTweety(models.Model):
-    picture1 = DBCameraField() # store in the database
+    picture = CameraField()
+
+    def __str__(self):
+        return (' %s' % self.picture).encode('ascii', errors='replace')
+   # picture1 = DBCameraField() # store in the database
    # picture2 = FSCameraField(format='gif', max_length=100) # by default storen on settings.MEDIA_ROOT
     #picture3 = FSCameraField(format='png', storage=CameraFileSystemStorage('/absolute/path/to/'), null=True, blank=True) # store on filesystem
 

@@ -24,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '=$@^*gznpa)c-eiop0fybyqsty61vj%8%^2lxl!9t1*-g8#av8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -36,12 +36,14 @@ INSTALLED_APPS = (
     'django_behave',
     'django_cleanup',
     'webcam',
+    'pipeline',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     #'tinymce',
     'django_markdown',
     'el_pagination',
@@ -88,23 +90,23 @@ WSGI_APPLICATION = 'tweetytimor.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-#DATABASES = {
- #   'default': {
-  #      'ENGINE': 'django.db.backends.sqlite3',
-   #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    #}
-#}
-
 DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'bank',
-            'USER': environ['DB_USERNAME'],
-            'PASSWORD': environ['DB_PASSWORD'],
-            'HOST': 'localhost',
-            'POST': '3306',
-            }
-        }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+
+#DATABASES = {
+ #       'default': {
+  #          'ENGINE': 'django.db.backends.mysql',
+   #         'NAME': 'bank',
+    #        'USER': environ['DB_USERNAME'],
+     #       'PASSWORD': environ['DB_PASSWORD'],
+      #      'HOST': 'localhost',
+       #     'POST': '3306',
+        #    }
+        #}
 
 
 # Internationalization
@@ -128,11 +130,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'tweety_static'),
-)
+        os.path.join(BASE_DIR, 'bower_components'),
+        )
+
+STATIC_ROOT = os.path.join(os.path.dirname(os.path.dirname(BASE_DIR)), "staticfiles")
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR + '/media/'
+
+SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/'
 
@@ -142,6 +148,51 @@ MARKDOWN_EDITOR_SKIN = 'simple'
 MARKDOWN_EXTENSIONS = ['extra']
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+# using Pipeline
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+
+STATICFILES_FINDERS = (
+            'django.contrib.staticfiles.finders.FileSystemFinder',
+            'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+            'pipeline.finders.PipelineFinder',
+            )
+
 
 TEST_RUNNER = 'django_behave.runner.DjangoBehaveTestSuiteRunner'
 AUTH_USER_MODEL = 'tweety.TweetyUser'
+PIPELINE_ENABLED = True
+
+PIPELINE = {
+    'STYLESHEETS': {
+        'tweetytimor': {
+            'source_filenames': (
+            'css/bootstrap.min.css',
+            'css/tweety.css',
+            'webcam/django-webcam.css',
+            'webcam/django-webcam.min.css',
+            ),
+            'output_filename': 'css/tweetytimor.css',
+            'extra_context': {
+                'media': 'screen,projection',
+            },
+        },
+    },
+    'JAVASCRIPT': {
+        'libraries': {
+            'source_filenames': (
+            'js/jquery-1.11.3.min.js',
+            'js/bootstrap.min.js',
+            'webcam/django-webcam.js',
+            'webcam/django-webcam.min.js',
+            'webcam/jquery-1.7.2.min.js',
+            'webcam/jquery.django-webcam.js',
+            'webcam/jquery.django.min.js',
+            'el-pagination/js/el-pagination.js',
+            ),
+            'output_filename': 'js/libraries.js',
+            }
+        }
+    }
+
+PIPELINE['CSS_COMPRESSOR'] = 'pipeline.compressors.yuglify.YuglifyCompressor'
+PIPELINE['JS_COMPRESSOR'] = 'pipeline.compressors.yuglify.YuglifyCompressor'

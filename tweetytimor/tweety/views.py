@@ -49,6 +49,7 @@ class Person(CreateView):
     success_url = reverse_lazy('index')
 
 
+
 class CreateTweetyUser(SuccessMessageMixin, CreateView):
     form_class = RegisterUser
     template_name = "tweety/create.html"

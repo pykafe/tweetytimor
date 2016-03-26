@@ -13,7 +13,7 @@ class LikeForm(ModelForm):
 class PersonForm(ModelForm):
     class Meta:
         model = PersonTweety
-        fields = ['picture1',]
+        fields = ['picture',]
 
 
 class RegisterUser(ModelForm):
