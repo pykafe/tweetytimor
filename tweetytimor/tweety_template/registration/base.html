@@ -1,12 +1,16 @@
 {% load i18n %}
 {% load static %}
+{% load pipeline %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+        {% javascript 'libraries' %}
+        {% stylesheet 'tweetytimor' %}
+        
+        <!--<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
         <link rel="stylesheet" href="{% static 'css/tweety.css' %}" />
         <script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js'%}"></script>
-	    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>-->
     
         <title>{% block title %}Tweety - Timor{% endblock %}</title>
     </head>
