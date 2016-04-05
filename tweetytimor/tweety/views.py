@@ -1,12 +1,17 @@
 from django.views.generic.edit import CreateView, ModelFormMixin, UpdateView
+from django.views.generic.base import TemplateView
 from django.contrib.messages.views import SuccessMessageMixin
-from tweety.models import TweetyTimor, TweetyLike, TweetyUser
+from tweety.models import TweetyTimor, TweetyLike, TweetyUser, PersonTweety
 from .forms import LikeForm, RegisterUser, PersonForm
 from django.core.urlresolvers import reverse_lazy
 #from tinymce.widgets import TinyMCE
 #from django import forms
 from django_markdown.widgets import MarkdownWidget
 from django.forms.widgets import Widget
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from webcam.fields import CameraField
+
 
 
 class Index(CreateView):
@@ -21,6 +26,7 @@ class Index(CreateView):
         context['tweets_histories'] = TweetyTimor.objects.order_by('-created_on')
         context['total_tweets'] = TweetyTimor.objects.count()
         context['like_tweets'] = TweetyLike.objects.count()
+        context['cameras'] = PersonTweety.objects.all()
         context['like_form'] = LikeForm()
         return context
 
@@ -48,6 +54,31 @@ class Person(CreateView):
     template_name = "webcam/templates/webcam/dbwidget.html"
     success_url = reverse_lazy('index')
 
+    #def dispatch(self, request, *args, **kwargs):
+     #   import pudb; pudb.set_trace()
+       # return super(Person, self).dispatch(request, *args, **kwargs)
+   # def save(self):
+    #    picture = super(Person, self).save()
+     #   picture = self.cleaned_data["picture"]
+      #  picture.save()
+       # return picture
+
+   # def form_valid(self, form):
+    #    self.object = form.save()
+     #   self.object.picture()
+      #  self.object.save()
+       # return super(ModelFormMixin, self).form_valid(form)
+
+    #def get_person(self, form, request):
+
+      #  if request.method == 'POST':
+       #     form = Person(request.POST)
+        #    if form.is_valid():
+         #       picture = form.cleaned_data['picture']
+          #      return HttpResponseRedirect('/')
+        #else:
+         #   form = PersonForm()
+        #return render(request, )
 
 
 class CreateTweetyUser(SuccessMessageMixin, CreateView):
@@ -83,3 +114,7 @@ class UpdateTweety(UpdateView):
         form = super(UpdateTweety, self).get_form()
         form.fields['comment'].widget = MarkdownWidget(attrs={'cols': 20, 'rows': 20})
         return form
+
+
+class TodoView(TemplateView):
+    template_name = 'tweety/comment.html'

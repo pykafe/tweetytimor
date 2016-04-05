@@ -1,0 +1,37 @@
+{% load i18n %}
+{% load static %}
+{% load pipeline %}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Riot Todo</title>
+         {% javascript 'libraries' %}
+        {% stylesheet 'tweetytimor' %}
+
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="stylesheet" href="todo.css">
+    </head>
+    
+    <body>
+
+        <todo></todo>
+            <script src="todo.tag" type="riot/tag"></script>
+            <script src="../bower_components/riot%2Bcompiler.min.js"></script>
+
+
+            <script>
+                riot.mount('todo', {
+                    title: 'I want to behave!',
+                    items: [
+                        { title: "Hello Wolrd"},
+                ]
+                })
+
+            </script>
+
+        </body>
+</html>
+

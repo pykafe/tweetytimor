@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '=$@^*gznpa)c-eiop0fybyqsty61vj%8%^2lxl!9t1*-g8#av8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 INSTALLED_APPS = (
     'tweety',
+    'gunicorn',
     'django_behave',
     'django_cleanup',
     'webcam',
@@ -160,6 +161,7 @@ STATICFILES_FINDERS = (
 
 TEST_RUNNER = 'django_behave.runner.DjangoBehaveTestSuiteRunner'
 AUTH_USER_MODEL = 'tweety.TweetyUser'
+
 PIPELINE_ENABLED = True
 
 PIPELINE = {
@@ -196,3 +198,4 @@ PIPELINE = {
 
 PIPELINE['CSS_COMPRESSOR'] = 'pipeline.compressors.yuglify.YuglifyCompressor'
 PIPELINE['JS_COMPRESSOR'] = 'pipeline.compressors.yuglify.YuglifyCompressor'
+

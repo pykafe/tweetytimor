@@ -15,7 +15,6 @@ class PersonForm(ModelForm):
         model = PersonTweety
         fields = ['picture',]
 
-
 class RegisterUser(ModelForm):
     class Meta:
         model = TweetyUser

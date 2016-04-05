@@ -9,11 +9,19 @@ import webcam.admin
 
 #from webcam.fields import DBCameraField, FSCameraField
 #from webcam.storage import CameraFileSystemStorage
+import random
+from webcam.tests import temp_storage
 from webcam.fields import CameraField
+#from tweetytimor.settings import MEDIA_ROOT
 
 
 class PersonTweety(models.Model):
-    picture = CameraField()
+
+    picture = CameraField('camera', format='jpeg', null=True, blank=True, upload_to = 'pictures')
+
+    def __str__(self,):
+        self.picture = picture
+
 
     def __str__(self):
         return (' %s' % self.picture).encode('ascii', errors='replace')

@@ -1,4 +1,13 @@
+{% extends 'tweety/base.html' %}
+
+{% block title %}
+    Tweety Webcam
+{% endblock %}
+
+{% block content %}
 {% load i18n static %}
+<form action="." method="post" enctype="multipart/form-data">
+    {% csrf_token %}
 <input type="hidden" name="{{ name }}" id="{{ attrs.id }}" value=""/>
 <input type="hidden" name="data_{{ name }}" id="data_{{ attrs.id }}" value="{{ image }}"/>
 <img class="camera-preview" id="{{ attrs.id }}-image" width="{{ width }}" height="{{ height }}"/>
@@ -18,3 +27,6 @@
        onclick="window.cameramonitor.show_monitor('{{ format }}', $('#data_{{ attrs.id }}'), $('#{{ attrs.id }}-image'))"/>
 <input type="button" class="btn" value='{% trans 'Clear' %}'
        onclick="window.cameramonitor.clear($('#data_{{attrs.id}}'), $('#{{ attrs.id }}-image'))"/>
+<input type="submit" name"save" value="Save"/>
+</form>
+{% endblock %}

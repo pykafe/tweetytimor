@@ -156,6 +156,12 @@
                 <div id="tweetdisplay_1" class="nav nav-pills">
                     <div class="row" id="body_box">
                         <div class="col-md-12">
+                            {% for camera in cameras %}
+                              {% if camera.picture %}
+                              <img src="{{ MEDIA_URL }}{{ camera.picture }}" class="img-circle circle-border" width=100  height=100 />
+                                {% endif %}
+
+                                {% endfor %}
                             <p><button id="toggle_history" class="btn btn-default">Show all History</button></p>
                             <h3>Total
                                 <span class="badge"> 
