@@ -83,6 +83,7 @@ a {
 form {
     display: block;
     margin-top: 0em;
+	text-align: -webkit-center;
 }
 
 #center-form-reset-passworld {

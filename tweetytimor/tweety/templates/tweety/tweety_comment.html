@@ -37,20 +37,18 @@
                                     {% else %} Tweets {% endif %}
                                 </h4>
                                 <ul>
-                                    <blockquote>
-                                        {% for tweet in tweets %}
-                                            <li class="tweet">
-                                                {% if tweet.photo %}
-                                                    <a href="{{ tweet.photo.url }}">
-                                                    <img src="{{ tweet.photo.url }}" class="img-thumbnail thumbnail-border" width=50 height=40/></a>  
-                                                {% endif %}                   
-                                                    <p>{{ tweet.comment|safe }}</p>
-                                                <span>Created on {{ tweet.created_on }}</span>  
-                                            </li>
-                                                <a href="{% url 'tweety_update' tweet.pk %}" class="btn btn-primary">Update</a>
-                                                <a href="{% url 'tweety_delete' tweet.pk %}" class="btn btn-danger">Delete</a>
-                                        {% endfor %}
-                                    </blockquote>
+									{% for tweet in tweets %}
+										<li class="tweet">
+											{% if tweet.photo %}
+												<a href="{{ tweet.photo.url }}">
+												<img src="{{ tweet.photo.url }}" class="img-thumbnail thumbnail-border" width=50 height=40/></a>  
+											{% endif %}                   
+												<p>{{ tweet.comment|safe }}</p>
+											<span>Created on {{ tweet.created_on }}</span>  
+										</li>
+											<a href="{% url 'tweety_update' tweet.pk %}" class="btn btn-primary">Update</a>
+											<a href="{% url 'tweety_delete' tweet.pk %}" class="btn btn-danger">Delete</a>
+									{% endfor %}                   
                                 </ul>
                             </div>
                     </div>
