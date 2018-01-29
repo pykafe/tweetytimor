@@ -1,6 +1,7 @@
 
-Pillow==2.9.0
+Pillow==3.4.2
 django-markdown==0.8.4
 django-webcam==0.4.2
 django-webcam-photoupload==0.3.3
 django-markdown==0.8.4
+-e git+git@github.com:saxix/django-webcam.git@2161bbbce4f1c26d4e30883b2f80e1e4d3636680#egg=django_webcam-develop
